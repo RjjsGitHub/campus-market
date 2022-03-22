@@ -1,0 +1,11 @@
+{
+  "groups": [],
+  "properties": [
+    {
+      "name": "spring.datasource.min-idle",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.min-idle."
+    }
+  ],
+  "hints": []
+}
