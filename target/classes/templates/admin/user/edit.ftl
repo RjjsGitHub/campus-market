@@ -89,23 +89,26 @@
                     <label class="lyear-radio radio-inline radio-primary" style="margin-left:30px;">
                     <input type="radio" name="sex" value="1" <#if user.sex == 1> checked </#if> >
                     <span>男</span>
+                    </label>
                     <label class="lyear-radio radio-inline radio-primary">
                     <input type="radio" name="sex" value="2" <#if user.sex == 2> checked </#if>>
                     <span>女</span>
+                    </label>
                     <label class="lyear-radio radio-inline radio-primary">
                     <input type="radio" name="sex" value="0" <#if user.sex == 0> checked </#if>>
                     <span>未知</span>
-                  </label>
+                    </label>
                   </div>
                   <div class="input-group" style="margin-top:15px;margin-bottom:15px;padding-left:25px;">
                     状态：
                     <label class="lyear-radio radio-inline radio-primary" style="margin-left:30px;">
                     <input type="radio" name="status" value="1" <#if user.status == 1> checked </#if>>
                     <span>正常</span>
+                    </label>
                     <label class="lyear-radio radio-inline radio-primary">
                     <input type="radio" name="status" value="0" <#if user.status == 0> checked </#if>>
                     <span>冻结</span>
-                  </label>
+                    </label>
                   </div>
                   <div class="form-group col-md-12">
                     <button type="button" class="btn btn-primary ajax-post" id="add-form-submit-btn">确 定</button>

@@ -1,5 +1,6 @@
 package com.yuanlrc.campus_market.controller.admin;
 
+import com.alibaba.fastjson.JSONArray;
 import com.yuanlrc.campus_market.bean.CodeMsg;
 import com.yuanlrc.campus_market.bean.PageBean;
 import com.yuanlrc.campus_market.bean.Result;
@@ -9,6 +10,7 @@ import com.yuanlrc.campus_market.entity.admin.User;
 import com.yuanlrc.campus_market.entity.common.Student;
 import com.yuanlrc.campus_market.service.admin.MenuService;
 import com.yuanlrc.campus_market.service.admin.OperaterLogService;
+import com.yuanlrc.campus_market.service.admin.RoleService;
 import com.yuanlrc.campus_market.service.admin.UserService;
 import com.yuanlrc.campus_market.util.MenuUtil;
 import com.yuanlrc.campus_market.util.ValidateEntityUtil;
@@ -33,50 +35,114 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private OperaterLogService operaterLogService;
 
-    @Autowired
-    private MenuService menuService;
+    /**
+     * 学生管理列表页面
+     * @param
+     * @param pageBean
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/list")
-    public String list(User user, PageBean<User> pageBean, Model model){
+    public String list(User user,PageBean<User> pageBean,Model model){
         model.addAttribute("title", "用户列表");
-        model.addAttribute("name", user.getUsername());
-        model.addAttribute("pageBean", userService.findList(user, pageBean));
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("pageBean", userService.findList(user,pageBean));
         return "admin/user/list";
     }
 
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    /**
+     * 用户添加页面
+     * @param
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/add",method=RequestMethod.GET)
     public String add(Model model){
-
+        model.addAttribute("roles", roleService.findAll());
         return "admin/user/add";
     }
 
-    @RequestMapping(value="/update_status",method=RequestMethod.POST)
+    /**
+     * 用户添加表单提交处理
+     * @param user
+     * @return
+     */
+    @RequestMapping(value="/add",method=RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> upDown(@RequestParam(name="username",required=true)String username ,@RequestParam(name="status",required=true)Integer status){
-        User user = userService.findByUsername(username);
-        if(user == null){
-            return Result.error(CodeMsg.ADMIN_GOODS_NO_EXIST);
+    public Result<Boolean> add(User user){
+        //用统一验证实体方法验证是否合法
+        CodeMsg validate = ValidateEntityUtil.validate(user);
+        if(validate.getCode() != CodeMsg.SUCCESS.getCode()){
+            return Result.error(validate);
         }
-        if(user.getStatus() == status){
-            return Result.error(CodeMsg.ADMIN_STUDENT_STATUS_NO_CHANGE);
+        if(userService.save(user) == null){
+            return Result.error(CodeMsg.ADMIN_ROLE_ADD_ERROR);
         }
-        if(status != Student.STUDENT_STATUS_ENABLE && status != Student.STUDENT_STATUS_UNABLE){
-            return Result.error(CodeMsg.ADMIN_STUDENT_STATUS_ERROR);
-        }
-        user.setStatus(status);
-        //进行更新数据库
-        if(userService.save(user) ==null){
-            return Result.error(CodeMsg.ADMIN_STUDENT_EDIT_ERROR);
-        }
+        log.info("添加角色【"+user+"】");
+        operaterLogService.add("添加角色【"+user.getUsername()+"】");
         return Result.success(true);
     }
 
+    /**
+     * 用户编辑页面
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/edit",method=RequestMethod.GET)
+    public String edit(@RequestParam(name="id",required=true)Long id,Model model){
+        model.addAttribute("user",userService.find(id));
+        model.addAttribute("roles", roleService.findAll());
+        return "admin/user/edit";
+    }
 
+    /**
+     * 角色修改表单提交处理
+     * @param
+     * @param user
+     * @return
+     */
+    @RequestMapping(value="/edit",method=RequestMethod.POST)
+    @ResponseBody
+    public Result<Boolean> edit(User user){
+        //用统一验证实体方法验证是否合法
+        CodeMsg validate = ValidateEntityUtil.validate(user);
+        if(validate.getCode() != CodeMsg.SUCCESS.getCode()){
+            return Result.error(validate);
+        }
+        User existUser = userService.find(user.getId());
+        if(existUser == null){
+            return Result.error(CodeMsg.ADMIN_ROLE_NO_EXIST);
+        }
+        existUser.setHeadPic(user.getHeadPic());
+        existUser.setUsername(user.getUsername());
+        existUser.setPassword(user.getPassword());
+        existUser.setRole(user.getRole());
+        existUser.setMobile(user.getMobile());
+        existUser.setEmail(user.getEmail());
+        existUser.setSex(user.getSex());
+        existUser.setStatus(user.getStatus());
+        if(userService.save(existUser) == null){
+            return Result.error(CodeMsg.ADMIN_ROLE_EDIT_ERROR);
+        }
+        log.info("编辑角色【"+user+"】");
+        operaterLogService.add("编辑角色【"+user.getUsername()+"】");
+        return Result.success(true);
+    }
+
+    /**
+     * 删除角色
+     * @param
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
     @ResponseBody
     public Result<Boolean> delete(@RequestParam(name="id",required=true)Long id){
