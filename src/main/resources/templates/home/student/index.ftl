@@ -10,7 +10,7 @@
 <body>
   <#include "../common/top_header.ftl"/>
 	<#include "../common/left_menu.ftl"/> 
-    ﻿<div class="container">
+    <div class="container">
     <div class="main center">
     <!-- 头像设置开始 -->
    <div class="head-img-box hide" id="head-img-box">
@@ -55,7 +55,7 @@
           	<#if ylrc_student.headPic??>
           	<img id="origin_ph" onClick="openUploadPanel()" src="/photo/view?filename=${ylrc_student.headPic}" old-src="/photo/view?filename=${ylrc_student.headPic}" alt="大头像"> 
 			<#else>
-			<img id="origin_ph" onClick="openUploadPanel()" src="/home/imgs/avatar1.png" old-src="/home/imgs/avatar1.png">
+			<img id="origin_ph" onClick="openUploadPanel()" src="/home/imgs/defult.jpeg" old-src="/home/imgs/defult.jpeg">
 			</#if>
           <img id="change_photo" src="/home/imgs/person_hover.png" alt="更换头像" style="display: none;">
     </div>

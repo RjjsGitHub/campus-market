@@ -49,10 +49,10 @@
                             <#if siteSetting.logo1??>
                             <img src="/photo/view?filename=${siteSetting.logo1}" id="show-logo1-img" >
                           	<#else>
-                            <img src="/home/imgs/index_logo.png" id="show-logo1-img" alt="默认logo1">
+                            <img src="/home/imgs/sxlogo.png" id="show-logo1-img" alt="默认logo1">
                           	</#if>
                           	<#else>
-                            <img src="/home/imgs/index_logo.png" id="show-logo1-img" alt="默认logo1">
+                            <img src="/home/imgs/sxlogo.png" id="show-logo1-img" alt="默认logo1">
                           	</#if>
                           </figure>
                         </li>
@@ -74,10 +74,10 @@
                             <#if siteSetting.logo1??>
                             <img src="/photo/view?filename=${siteSetting.logo2}" id="show-logo2-img" >
                           	<#else>
-                            <img src="/home/imgs/2shoujie_web_title.png" id="show-logo2-img" alt="默认logo2">
+                            <img src="/home/imgs/sxerlogo.jpeg" id="show-logo2-img" alt="默认logo2">
                           	</#if>
                           	<#else>
-                            <img src="/home/imgs/2shoujie_web_title.png" id="show-logo2-img" alt="默认logo2">
+                            <img src="/home/imgs/sxerlogo.jpeg" id="show-logo2-img" alt="默认logo2">
                           	</#if>
                           </figure>
                         </li>
@@ -85,31 +85,6 @@
                         <input type="file" id="select-file2" style="display:none;" onchange="uploadMuilt('show-logo2-img','logo2','select-file2')">
                         <li class="col-xs-4 col-sm-3 col-md-2">
                           <a class="pic-add" id="add-pic-btn2" href="javascript:void(0)" title="点击上传"></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label>二维码上传</label>
-                    <div class="form-controls">
-                      <ul class="list-inline clearfix lyear-uploads-pic">
-                        <li class="col-xs-4 col-sm-3 col-md-2">
-                          <figure>
-                            <#if siteSetting??>
-                            <#if siteSetting.logo1??>
-                            <img src="/photo/view?filename=${siteSetting.qrcode}" id="show-qrcode-img" >
-                          	<#else>
-                            <img src="/home/imgs/wx-fl-qrcode.png" id="show-qrcode-img" alt="默认qrcode">
-                          	</#if>
-                          	<#else>
-                            <img src="/home/imgs/wx-fl-qrcode.png" id="show-qrcode-img" alt="默认qrcode">
-                          	</#if>
-                          </figure>
-                        </li>
-                        <input type="hidden" name="qrcode" id="qrcode" value="<#if siteSetting??><#if siteSetting.qrcode??>${siteSetting.qrcode}</#if></#if>">
-                        <input type="file" id="select-file3" style="display:none;" onchange="uploadMuilt('show-qrcode-img','qrcode','select-file3')">
-                        <li class="col-xs-4 col-sm-3 col-md-2">
-                          <a class="pic-add" id="add-pic-btn3" href="javascript:void(0)" title="点击上传"></a>
                         </li>
                       </ul>
                     </div>
@@ -181,9 +156,6 @@ $(document).ready(function(){
 	});
 	$("#add-pic-btn2").click(function(){
 		$("#select-file2").click();
-	});
-	$("#add-pic-btn3").click(function(){
-		$("#select-file3").click();
 	});
 });
 

@@ -33,8 +33,6 @@ public class IndexController {
 	@Autowired
 	private GoodsService goodsService;
 	@Autowired
-	private GoodsCategoryService goodsCategoryService;
-	@Autowired
 	private StudentService studentService;
 	@Autowired
 	private NewsService newsService;

@@ -64,7 +64,7 @@
 		        			<#if ylrc_student.headPic??>
 		        			<img  class="avatar"  style="height:48px;width:48px;" src="/photo/view?filename=${ylrc_student.headPic}">
 		        			<#else>
-		        			<img  class="avatar"  style="height:48px;width:48px;" src="/home/imgs/avatar1.png">
+		        			<img  class="avatar"  style="height:48px;width:48px;" src="/home/imgs/defult.jpeg">
 		        			</#if>
 		        		</a>
 			        	<div  style="display:inline;"  class="person_name">

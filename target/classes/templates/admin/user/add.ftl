@@ -44,7 +44,7 @@
                       <ul class="list-inline clearfix lyear-uploads-pic">
                         <li class="col-xs-4 col-sm-3 col-md-2">
                           <figure>
-                            <img src="/admin/images/default-head.jpg" id="show-picture-img" alt="默认头像">
+                            <img src="/admin/images/defult.jpeg" id="show-picture-img" alt="默认头像">
                           </figure>
                         </li>
                         <input type="hidden" name="headPic" id="headPic">
