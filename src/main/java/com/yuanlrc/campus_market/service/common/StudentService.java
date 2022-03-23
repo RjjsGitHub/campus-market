@@ -30,7 +30,11 @@ public class StudentService {
 	public Student findBySn(String sn){
 		return studentDao.findBySn(sn);
 	}
-	
+
+	/**
+	 * 根据物品查询
+	 */
+
 	/**
 	 * 根据id查找
 	 * @param id

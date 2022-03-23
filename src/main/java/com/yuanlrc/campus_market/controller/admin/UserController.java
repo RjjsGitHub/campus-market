@@ -47,19 +47,7 @@ public class UserController {
         return "admin/user/list";
     }
 
-//    /**
-//     * 角色添加页面
-//     * @param model
-//     * @return
-//     */
-//    @RequestMapping(value="/add",method=RequestMethod.GET)
-//    public String add(Model model){
-//        List<Menu> findAll = menuService.findAll();
-//        model.addAttribute("topMenus",MenuUtil.getTopMenus(findAll));
-//        model.addAttribute("secondMenus",MenuUtil.getSecondMenus(findAll));
-//        model.addAttribute("thirdMenus",MenuUtil.getThirdMenus(findAll));
-//        return "admin/role/add";
-//    }
+
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Model model){

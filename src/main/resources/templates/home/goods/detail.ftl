@@ -167,7 +167,7 @@
 $(document).ready(function(){
    $("#buy-button").click(function(){
 		<#if ylrc_student??>
-		alert("请您联系卖家购买商品。"+"\n"+"电话:${ylrc_student.mobile!""}\n"+"QQ:${ylrc_student.qq!""}");
+		alert("请您联系卖家购买商品。"+"\n"+"电话:${seller_student.mobile!""}\n"+"QQ:${seller_student.qq!""}");
 		<#else>
 		alert("请您先登录");
 		window.location.href="/home/index/login";
@@ -211,5 +211,6 @@ function report(id){
 		alert('举报成功');
 	});
 }
-</script>	
+</script>
+</body>
 </html>

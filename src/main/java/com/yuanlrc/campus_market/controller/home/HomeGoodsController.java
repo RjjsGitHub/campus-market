@@ -3,6 +3,8 @@ package com.yuanlrc.campus_market.controller.home;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yuanlrc.campus_market.entity.common.Student;
+import com.yuanlrc.campus_market.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +36,8 @@ public class HomeGoodsController {
 	private GoodsService goodsService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private StudentService studentService;
 	/**
 	 * 物品详情页面
 	 * @param id
@@ -43,12 +47,15 @@ public class HomeGoodsController {
 	@RequestMapping(value="/detail")
 	public String detail(@RequestParam(name="id",required=true)Long id,Model model){
 		Goods goods = goodsService.findById(id);
+		Student seller_student = goods.getStudent();
 		if(goods == null){
 			model.addAttribute("msg", "物品不存在！");
 			return "error/runtime_error";
 		}
 		model.addAttribute("goods", goods);
 		model.addAttribute("commentList", commentService.findByGoods(goods));
+		model.addAttribute("seller_student",seller_student);
+
 		//更新商品浏览量
 		goods.setViewNumber(goods.getViewNumber() + 1);
 		goodsService.save(goods);

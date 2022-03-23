@@ -2,6 +2,7 @@ package com.yuanlrc.campus_market.dao.common;
 /**
  * 学生信息操作dao类
  */
+import com.yuanlrc.campus_market.entity.common.Goods;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,4 +26,10 @@ public interface StudentDao extends JpaRepository<Student, Long> {
 	 */
 	@Query("select s from Student s where id = :id")
 	Student find(@Param("id")Long id);
+
+	/**
+	 * 根据物品查询
+	 */
+	@Query("select s from Student s where id = :goods")
+	Student findByGoods(Goods goods);
 }

@@ -88,7 +88,8 @@ public class GoodsService {
 	public Goods findById(Long id){
 		return goodsDao.find(id);
 	}
-	
+
+
 	/**
 	 * 物品分类删除
 	 * @param id
