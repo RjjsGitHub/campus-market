@@ -20,7 +20,7 @@
                  <#if ylrc_user.headPic?length gt 0>
                 	<img class="img-avatar img-avatar-48 m-r-10" src="/photo/view?filename=${ylrc_user.headPic}" alt="${ylrc_user.username!""}" />
                  <#else>
-                 	<img class="img-avatar img-avatar-48 m-r-10" src="/admin/images/default-head.jpg" alt="${ylrc_user.username!""}" />
+                 	<img class="img-avatar img-avatar-48 m-r-10" src="/admin/images/defult.jpeg" alt="${ylrc_user.username!""}" />
                  </#if>
                  </#if>
                 <span>${ylrc_user.username!""} <span class="caret"></span></span>
