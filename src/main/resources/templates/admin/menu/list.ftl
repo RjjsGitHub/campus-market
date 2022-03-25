@@ -59,19 +59,18 @@ td{
                   </div>
                 </form>
                 -->
-                <#include "../common/third-menu.ftl"/>
+<#--                <#include "../common/third-menu.ftl"/>-->
               </div>
               <div class="card-body">
-                
                 <div class="table-responsive">
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>
-                          <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" id="check-all"><span></span>
-                          </label>
-                        </th>
+<#--                        <th>-->
+<#--                          <label class="lyear-checkbox checkbox-primary">-->
+<#--                            <input type="checkbox" id="check-all"><span></span>-->
+<#--                          </label>-->
+<#--                        </th>-->
                         <th>菜单名称</th>
                         <th>菜单url</th>
                         <th>菜单icon</th>
@@ -85,11 +84,11 @@ td{
                       <#if topMenus??>
                       <#list topMenus as topMenu>
                       <tr>
-                        <td style="vertical-align:middle;">
-                          <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" name="ids[]" value="${topMenu.id}"><span></span>
-                          </label>
-                        </td>
+<#--                        <td style="vertical-align:middle;">-->
+<#--                          <label class="lyear-checkbox checkbox-primary">-->
+<#--                            <input type="checkbox" name="ids[]" value="${topMenu.id}"><span></span>-->
+<#--                          </label>-->
+<#--                        </td>-->
                         <td style="vertical-align:middle;"><b>${topMenu.name}</b></td>
                         <td style="vertical-align:middle;">${topMenu.url}</td>
                         <td align="center"><i style="font-size:22px;" class="mdi ${topMenu.icon}" title="${topMenu.icon}" data-toggle="tooltip"></i></td>
@@ -102,11 +101,11 @@ td{
 					   <#list secondMenus as secondMenu>
 					   <#if secondMenu.parent.id == topMenu.id>
 					   <tr>
-                        <td style="vertical-align:middle;">
-                          <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" name="ids[]" value="${secondMenu.id}"><span></span>
-                          </label>
-                        </td>
+<#--                        <td style="vertical-align:middle;">-->
+<#--                          <label class="lyear-checkbox checkbox-primary">-->
+<#--                            <input type="checkbox" name="ids[]" value="${secondMenu.id}"><span></span>-->
+<#--                          </label>-->
+<#--                        </td>-->
                         <td style="vertical-align:middle;">|-----${secondMenu.name}</td>
                         <td style="vertical-align:middle;">${secondMenu.url}</td>
                         <td align="center"><i style="font-size:22px;" class="mdi ${secondMenu.icon}" title="${secondMenu.icon}" data-toggle="tooltip"></i></td>
@@ -119,11 +118,11 @@ td{
                       <#list thirdMenus as thirdMenu>
                       	<#if thirdMenu.parent.id == secondMenu.id>
 					    <tr>
-                        <td style="vertical-align:middle;">
-                          <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" name="ids[]" value="${thirdMenu.id}"><span></span>
-                          </label>
-                        </td>
+<#--                        <td style="vertical-align:middle;">-->
+<#--                          <label class="lyear-checkbox checkbox-primary">-->
+<#--                            <input type="checkbox" name="ids[]" value="${thirdMenu.id}"><span></span>-->
+<#--                          </label>-->
+<#--                        </td>-->
                         <td style="padding-left:45px;vertical-align:middle;">|-----${thirdMenu.name}</td>
                         <td style="vertical-align:middle;">${thirdMenu.url}</td>
                         <td align="center"><i style="font-size:22px;" class="mdi ${thirdMenu.icon}" title="${thirdMenu.icon}" data-toggle="tooltip"></i></td>
