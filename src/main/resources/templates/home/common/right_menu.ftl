@@ -1,5 +1,5 @@
 <aside>
-       
+
         <div id="release-button1" >
              <a  href="/home/student/publish_wanted" style="color: white" id="want-buy"> 我要买</a>
         </div>
@@ -9,7 +9,11 @@
         </div>       
         <br><br>
         <div id="release-button3" >
-            <a  href="/home/wanted_goods/list" style="color: white" > 求购专区</a>
+            <a href="/home/wanted_goods/list" style="color: white"> 求购专区</a>
+        </div>
+         <br><br>
+        <div id="release-button4" >
+            <a  href="/home/my_wish/list" style="color: white" id="my-wish"> 我的愿望清单</a>
         </div>
 
         <div class="helped ">

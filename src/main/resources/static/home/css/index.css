@@ -175,6 +175,8 @@ div.center { position: relative; }
 #release-button2:hover{background: rgb(75,192,165);}
 #release-button3 {width: 140px;height: 52px; text-align:center;line-height:48px;font-size:24px;font-family: Arial, "宋体";background-position: center center; background-color: #4BC00F;}
 #release-button3:hover{background: rgb(75,192,165);}
+#release-button4 {width: 140px;height: 52px; text-align:center;line-height:48px;font-size:22px;font-family: Arial, "宋体";background-position: center center; background-color: #150fc0;}
+#release-button4:hover{background: rgb(75, 91, 192);}
 .item-list { width: 100%; margin-bottom: 60px; }
 .items { font-size: 0px; list-style: outside none none; text-align: justify; text-align-last: justify; }
 .items::after { content: ""; display: inline-block; width: 100%; }

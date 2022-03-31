@@ -73,10 +73,14 @@
                         	</div>
                         </li>
                     </ul>
-                    <div id="buy-button" >
-            			<a style="color: white;cursor:pointer;" > 联系卖家</a>
-       	 			</div>
-                    <div class="complain">
+                    <div >
+            			<a id="buy-button" style="color: white;cursor:pointer;" > 联系卖家</a>
+					</div>
+					<div>
+						<a href="../goods/add_to_wish?goods=${goods}" id="wish-button" style="color: black;cursor:pointer;" > 添加至我的愿望清单</a>
+					</div>
+
+					<div class="complain">
                     	<a href="javascript:void(0);" onclick="report(${goods.id});">•&nbsp;&nbsp;&nbsp;&nbsp;举报&nbsp;&nbsp;&nbsp;&nbsp;•</a>
                     </div>
                 </div>
@@ -87,7 +91,7 @@
             			<#if goods.student.headPic??>
             			<img id="user_ph" src="/photo/view?filename=${goods.student.headPic}">
             			<#else>
-            			<img id="user_ph" src="/home/imgs/avatar1.png">
+            			<img id="user_ph" src="/home/imgs/defult.jpeg">
             			</#if>
             		</a>
             		<p id="user_cmt">${goods.content}</p>
@@ -103,7 +107,7 @@
 								<#if ylrc_student.headPic??>
 								<img class="avatar" src="/photo/view?filename=${ylrc_student.headPic}" alt="头像"/>
 								<#else>
-								<img class="avatar" src="/home/imgs/avatar1.png" alt="头像"/>
+								<img class="avatar" src="/home/imgs/defult.jpeg" alt="头像"/>
 								</#if>
 								<div class="commenting want-commenting clearfix" >
 									<div class="comment-input-wr-wr" style="margin-right:56px;">
@@ -176,6 +180,34 @@ $(document).ready(function(){
    $("#to-login-btn").click(function(){
    		window.location.href="/home/index/login";
    });
+
+	$("#wish-button").click(function(){
+		<#if ylrc_student?? >
+		<#else>
+		alert("请您先登录");
+		window.location.href="/home/index/login";
+		</#if>
+		$.ajax({
+			url: '/home/goods/add_to_wish',
+			method: 'post',
+			success: function (r) {
+				if (r.success) {
+					alert("商品:${goods.name!""}" + "  " + "已添加至愿望清单。");
+				} else {
+					alert(" 添加 失败 ");
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				layer.closeAll('loading');
+				var response = JSON.parse(jqXHR.responseText);
+				if(response.status==404){
+					alert("服务不存在。");
+				}else{
+					alert("请求发生错误");
+				}
+			}
+		});
+	});
 
 	$("#submit-comment-btn").click(function(){
 		var content = $("#comment-content").val();
