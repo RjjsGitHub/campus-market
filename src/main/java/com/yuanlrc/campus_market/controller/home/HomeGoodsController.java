@@ -1,10 +1,17 @@
 package com.yuanlrc.campus_market.controller.home;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.yuanlrc.campus_market.bean.CodeMsg;
+import com.yuanlrc.campus_market.constant.SessionConstant;
 import com.yuanlrc.campus_market.entity.common.Student;
-import com.yuanlrc.campus_market.service.common.StudentService;
+import com.yuanlrc.campus_market.entity.common.Wish;
+import com.yuanlrc.campus_market.service.common.*;
+import com.yuanlrc.campus_market.util.SessionUtil;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +24,9 @@ import com.yuanlrc.campus_market.bean.PageBean;
 import com.yuanlrc.campus_market.bean.Result;
 import com.yuanlrc.campus_market.entity.common.Goods;
 import com.yuanlrc.campus_market.entity.common.GoodsCategory;
-import com.yuanlrc.campus_market.service.common.CommentService;
-import com.yuanlrc.campus_market.service.common.GoodsCategoryService;
-import com.yuanlrc.campus_market.service.common.GoodsService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 前台物品管理控制器
@@ -38,6 +45,8 @@ public class HomeGoodsController {
 	private CommentService commentService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private MyWishServer myWishServer;
 	/**
 	 * 物品详情页面
 	 * @param id
@@ -61,7 +70,26 @@ public class HomeGoodsController {
 		goodsService.save(goods);
 		return "home/goods/detail";
 	}
-	
+
+	@RequestMapping(value="/add_to_wish")
+	public Result addToWish(@RequestParam(name="id",required=true)Long id){
+			Student loginedStudent = (Student) SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
+			Goods goods = goodsService.findById(id);
+
+			Wish wish = new Wish();
+			wish.setLoginStudent(loginedStudent.getId());
+			wish.setPhoto(goods.getPhoto());
+			wish.setGoods(goods);
+			wish.setStudent(goods.getStudent());
+			wish.setSellPrice(goods.getSellPrice());
+			wish.setCreateTime(goods.getCreateTime());
+			wish.setUpdateTime(goods.getUpdateTime());
+			wish.setStatus(goods.getStatus());
+			wish.setName(goods.getName());
+			myWishServer.save(wish);
+			return Result.success(true);
+	}
+
 	/**
 	 * 根据商品分类搜索商品信息
 	 * @param cid

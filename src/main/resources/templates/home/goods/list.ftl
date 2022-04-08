@@ -54,7 +54,7 @@
 	        <#if pageBean.currentPage == showPage>
 	        <a class="page-num cur" href="javascript:void(0)">${showPage}</a>
 	        <#else>
-            <a class="page-num " href="list?cid=${gc.id!""}&currentPage=${showPage}">${showPage}</a>
+            <a class="page-num " href="list?ci d=${gc.id!""}&currentPage=${showPage}">${showPage}</a>
            	</#if>
            	</#list>
            	<#if pageBean.currentPage == pageBean.totalPage>

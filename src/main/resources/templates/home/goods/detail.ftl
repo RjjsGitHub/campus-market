@@ -38,7 +38,7 @@
                     			<span>商品编号</span>
                     		</div>
                     		<div class="value">
-                    			<span id="pid">${goods.id}</span>
+                    			<span id="pid" runat="server">${goods.id}</span>
                     		</div>
                         </li>
                         <li class="ershou-time">
@@ -77,7 +77,7 @@
             			<a id="buy-button" style="color: white;cursor:pointer;" > 联系卖家</a>
 					</div>
 					<div>
-						<a href="../goods/add_to_wish?goods=${goods}" id="wish-button" style="color: black;cursor:pointer;" > 添加至我的愿望清单</a>
+						<a  id="wish-button" style="color: black;cursor:pointer;" > 添加至我的愿望清单</a>
 					</div>
 
 					<div class="complain">
@@ -182,29 +182,15 @@ $(document).ready(function(){
    });
 
 	$("#wish-button").click(function(){
-		<#if ylrc_student?? >
-		<#else>
+		<#if !ylrc_student?? >
 		alert("请您先登录");
-		window.location.href="/home/index/login";
+		window.location.href="/home/index/login;
 		</#if>
 		$.ajax({
-			url: '/home/goods/add_to_wish',
+			url: '/home/goods/add_to_wish?id=${goods.id}',
 			method: 'post',
-			success: function (r) {
-				if (r.success) {
-					alert("商品:${goods.name!""}" + "  " + "已添加至愿望清单。");
-				} else {
-					alert(" 添加 失败 ");
-				}
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				layer.closeAll('loading');
-				var response = JSON.parse(jqXHR.responseText);
-				if(response.status==404){
-					alert("服务不存在。");
-				}else{
-					alert("请求发生错误");
-				}
+			error : function (){
+				alert(' 添加成功！ ');
 			}
 		});
 	});

@@ -29,7 +29,6 @@ public interface GoodsDao extends JpaRepository<Goods, Long>,JpaSpecificationExe
 	 * @return
 	 */
 	List<Goods> findByStudent(Student student);
-	
 	/**
 	 * 根据学生id和商品id查询
 	 * @param id
