@@ -33,25 +33,6 @@ var zb_cookie = {
 String.prototype.right = function(i) { //为String对象增加一个Right方法
     return this.slice(this.length - i,this.length);
 };
-/*登录注册初始化*/
-//var login_init=function(){
-//    if($(".login-cover").size()==0) {
-//        var login_area = '<div class="login-cover"><div class="login-wr"><div class="login-header"><img class="login-logo" src="imgs/logo.png" alt="logo"/>' +
-//            '<p class="site-name">武科大步行街</p><div class="share-buttons" style="display:none;"><div id="renren-button">人人网登陆</div><div id="qq-button">微信登陆</div></div></div>' +
-//            '<div class="login-form-container"><form action="">'+
-//            '<p class="login-p"><label>邮箱&nbsp;</label><input class="login-input" type="text" id="user-name"/></p>'+
-//            '<p class="login-p"><label>密码&nbsp;</label><input class="login-input" type="password" id="pw"/></p>'+
-//            '<p class="ex clearfix"><label class="rem-wr" for="rem"><input id="rem" name="rem" type="checkbox"/><span>记住我</span></label><a class="forget" href="/login/forget">忘记密码</a>' +
-//            '</p><button class="submit" type="button">登录二手街</button></form><a class="reg" href="javascript:void(0);">马上注册</a></div></div></div>' +
-//            '<div class="reg-cover"><div class="reg-wr"><div class="reg-header"><img class="login-logo" src="/resource/image/logo.png" alt="logo"/>' +
-//            '<p class="site-name">校园二手街</p></div><div class="reg-form-container"><form action=""><input class="input-class" type="text" id="uname" name="uname" placeholder="昵称"/>' +
-//            '<input class="input-class" type="email" id="email" name="email" placeholder="邮箱"/>' +
-//            '<!--[if lte IE 9]><input class="input-class pw-text" type="text"/><![endif]--><input class="input-class pw-input" type="password" id="passw" name="passw" placeholder="密码"/>' +
-//            '<!--[if lte IE 9]><input class="input-class pw-text" type="text"/><![endif]--><input class="input-class pw-input" type="password" id="cpassw" name="cpassw" placeholder="确认密码" />' +
-//            '<button type="button" class="submit">注册二手街</button></form><a class="log" href="javascript:void(0);">立即登录</a></div></div></div>';
-//        $("body").append($(login_area));
-//    }
-//};
 (function() {
     var windowScroll = function() {//页面收缩方法
         var state = false,

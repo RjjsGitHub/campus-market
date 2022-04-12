@@ -33,9 +33,7 @@ td{
     
     <!--页面主要内容-->
     <main class="lyear-layout-content">
-      
       <div class="container-fluid">
-        
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
@@ -61,7 +59,6 @@ td{
                 <#include "../common/third-menu.ftl"/>
               </div>
               <div class="card-body">
-                
                 <div class="table-responsive">
                   <table class="table table-bordered">
                     <thead>
@@ -83,7 +80,7 @@ td{
                         <th>添加时间</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <body>
                       <#if pageBean.content?size gt 0>
                       <#list pageBean.content as goods>
                       <tr>
@@ -134,27 +131,21 @@ td{
                     <#else>
                     <tr align="center"><td colspan="11">这里空空如也！</td></tr>
 					</#if>
-                    </tbody>
+                    </body>
                   </table>
                 </div>
                 <#if pageBean.total gt 0>
                 <ul class="pagination ">
                   <#if pageBean.currentPage == 1>
                   <li class="disabled"><span>«</span></li>
-                  <#else>
-                  <li><a href="list?<#if goodsCategoryName??>goodsCategory.name<#elseif sn??>student.sn<#else>name</#if>=${name!sn!goodsCategoryName!""}&currentPage=1">«</a></li>
                   </#if>
                   <#list pageBean.currentShowPage as showPage>
                   <#if pageBean.currentPage == showPage>
                   <li class="active"><span>${showPage}</span></li>
-                  <#else>
-                  <li><a href="list?<#if goodsCategoryName??>goodsCategory.name<#elseif sn??>student.sn<#else>name</#if>=${name!sn!goodsCategoryName!""}&currentPage=${showPage}">${showPage}</a></li>
                   </#if>
                   </#list>
                   <#if pageBean.currentPage == pageBean.totalPage>
                   <li class="disabled"><span>»</span></li>
-                  <#else>
-                  <li><a href="list?<#if goodsCategoryName??>goodsCategory.name<#elseif sn??>student.sn<#else>name</#if>=${name!sn!goodsCategoryName!""}&currentPage=${pageBean.totalPage}">»</a></li>
                   </#if>
                   <li><span>共${pageBean.totalPage}页,${pageBean.total}条数据</span></li>
                 </ul>

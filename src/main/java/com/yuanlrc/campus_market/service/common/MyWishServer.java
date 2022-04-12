@@ -71,22 +71,15 @@ public class MyWishServer {
         return getTotalCount(Goods.GOODS_STATUS_SOLD);
     }
 
-    /**
-     * 根据物品名称模糊搜索
-     * @param name
-     * @return
-     */
-    public List<Goods> findListByName(String name){
-        return goodsDao.findListByName(name);
-    }
+
 
     /**
-     * 根据学生查找物品
-     * @param student
+     * 根据登录学生查找愿望清单
+     * @param
      * @return
      */
-    public List<Goods> findByStudent(Student student){
-        return goodsDao.findByStudent(student);
+    public List<Wish> findByLoginStudent(Long id){
+        return myWishDao.findByLoginStudent(id);
     }
 
     /**
@@ -95,6 +88,10 @@ public class MyWishServer {
      */
     public void delete(Long id){
         myWishDao.deleteById(id);
+    }
+
+    public Long isExit(String name){
+       return myWishDao.existsByGoodsName(name);
     }
 
     /**
@@ -108,12 +105,12 @@ public class MyWishServer {
     /**
      * 搜索清单列表
      * @param pageBean
-     * @param wish
+     * @param
      * @return
      */
-    public PageBean<Wish> findlist(PageBean<Wish> pageBean, Wish wish){
+    public PageBean<Wish> findlist(PageBean<Wish> pageBean,Wish wish){
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-        exampleMatcher = exampleMatcher.withMatcher("login_student", ExampleMatcher.GenericPropertyMatchers.contains());
+        exampleMatcher = exampleMatcher.withMatcher("id", ExampleMatcher.GenericPropertyMatchers.contains());
         exampleMatcher = exampleMatcher.withIgnorePaths("status");
         Example<Wish> example = Example.of(wish, exampleMatcher);
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
@@ -124,5 +121,7 @@ public class MyWishServer {
         pageBean.setTotalPage(findAll.getTotalPages());
         return pageBean;
     }
+
+
 
 }

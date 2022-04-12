@@ -166,7 +166,6 @@
 	<#include "../common/bottom_footer.ftl"/> 
 <script  src="/home/js/jquery-3.1.1.min.js"></script>
 <script src="/home/js/common.js"></script>
-<script src="/home/js/add.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
    $("#buy-button").click(function(){
@@ -182,15 +181,25 @@ $(document).ready(function(){
    });
 
 	$("#wish-button").click(function(){
+		var id = ${goods.id};
 		<#if !ylrc_student?? >
 		alert("请您先登录");
 		window.location.href="/home/index/login;
 		</#if>
 		$.ajax({
-			url: '/home/goods/add_to_wish?id=${goods.id}',
+			url: '/home/goods/add_to_wish',
 			method: 'post',
-			error : function (){
-				alert(' 添加成功！ ');
+			data:{id:id},
+			dataType:'json',
+			success:function (data){
+				if (data.code == 0){
+					alert(' 添加成功！ ');
+				}else {
+					alert(data.msg);
+				}
+			},
+			error:function (){
+				alert('网络出现错误！');
 			}
 		});
 	});

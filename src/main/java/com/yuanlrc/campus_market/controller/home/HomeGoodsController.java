@@ -1,9 +1,6 @@
 package com.yuanlrc.campus_market.controller.home;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.yuanlrc.campus_market.bean.CodeMsg;
 import com.yuanlrc.campus_market.constant.SessionConstant;
@@ -72,10 +69,11 @@ public class HomeGoodsController {
 	}
 
 	@RequestMapping(value="/add_to_wish")
-	public Result addToWish(@RequestParam(name="id",required=true)Long id){
+	@ResponseBody
+	public Result<Boolean> addToWish(@RequestParam(name="id",required=true)Long id){
+		try {
 			Student loginedStudent = (Student) SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
 			Goods goods = goodsService.findById(id);
-
 			Wish wish = new Wish();
 			wish.setLoginStudent(loginedStudent.getId());
 			wish.setPhoto(goods.getPhoto());
@@ -86,8 +84,15 @@ public class HomeGoodsController {
 			wish.setUpdateTime(goods.getUpdateTime());
 			wish.setStatus(goods.getStatus());
 			wish.setName(goods.getName());
-			myWishServer.save(wish);
-			return Result.success(true);
+			if (myWishServer.isExit(goods.getName()) != goods.getId()) {
+				myWishServer.save(wish);
+				return Result.success(true);
+			}else {
+				return Result.error(CodeMsg.HOME_STUDENT_WISH_EXIXT);
+			}
+		} catch (Exception e) {
+			return Result.error(CodeMsg.HOME_STUDENT_WISH_ADD_ERROR);
+		}
 	}
 
 	/**
