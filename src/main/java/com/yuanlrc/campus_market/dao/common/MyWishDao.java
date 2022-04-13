@@ -1,6 +1,7 @@
 package com.yuanlrc.campus_market.dao.common;
 
 import com.yuanlrc.campus_market.entity.common.Goods;
+import com.yuanlrc.campus_market.entity.common.Student;
 import com.yuanlrc.campus_market.entity.common.Wish;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -22,4 +23,6 @@ public interface MyWishDao  extends JpaRepository<Wish, Long>, JpaSpecificationE
 
     @Query(value = "select goods_id from ylrc_mywish where name = :name",nativeQuery=true)
     Long existsByGoodsName(@Param("name")String name);
+
+
 }

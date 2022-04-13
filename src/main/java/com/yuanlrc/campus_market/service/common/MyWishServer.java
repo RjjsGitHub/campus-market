@@ -1,12 +1,14 @@
 package com.yuanlrc.campus_market.service.common;
 
 import com.yuanlrc.campus_market.bean.PageBean;
+import com.yuanlrc.campus_market.constant.SessionConstant;
 import com.yuanlrc.campus_market.dao.common.GoodsDao;
 import com.yuanlrc.campus_market.dao.common.MyWishDao;
 import com.yuanlrc.campus_market.dao.common.StudentDao;
 import com.yuanlrc.campus_market.entity.common.Goods;
 import com.yuanlrc.campus_market.entity.common.Student;
 import com.yuanlrc.campus_market.entity.common.Wish;
+import com.yuanlrc.campus_market.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -36,14 +38,7 @@ public class MyWishServer {
         return myWishDao.save(wish);
     }
 
-    /**
-     * 根据id查询
-     * @param
-     * @return
-     */
-    public List<Goods> findByStuId(Student student){
-        return goodsDao.findByStudent(student);
-    }
+
 
     /**
      * 获取所有的物品
@@ -73,14 +68,7 @@ public class MyWishServer {
 
 
 
-    /**
-     * 根据登录学生查找愿望清单
-     * @param
-     * @return
-     */
-    public List<Wish> findByLoginStudent(Long id){
-        return myWishDao.findByLoginStudent(id);
-    }
+
 
     /**
      * 愿望清单删除
@@ -110,8 +98,8 @@ public class MyWishServer {
      */
     public PageBean<Wish> findlist(PageBean<Wish> pageBean,Wish wish){
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-        exampleMatcher = exampleMatcher.withMatcher("id", ExampleMatcher.GenericPropertyMatchers.contains());
-        exampleMatcher = exampleMatcher.withIgnorePaths("status");
+        exampleMatcher = exampleMatcher.withMatcher("login_student", ExampleMatcher.GenericPropertyMatchers.contains())
+                                       .withIgnorePaths("status");
         Example<Wish> example = Example.of(wish, exampleMatcher);
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         PageRequest pageable = PageRequest.of(pageBean.getCurrentPage()-1, pageBean.getPageSize(), sort);
