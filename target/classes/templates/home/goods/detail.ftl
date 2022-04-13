@@ -38,7 +38,7 @@
                     			<span>商品编号</span>
                     		</div>
                     		<div class="value">
-                    			<span id="pid">${goods.id}</span>
+                    			<span id="pid" runat="server">${goods.id}</span>
                     		</div>
                         </li>
                         <li class="ershou-time">
@@ -73,10 +73,14 @@
                         	</div>
                         </li>
                     </ul>
-                    <div id="buy-button" >
-            			<a style="color: white;cursor:pointer;" > 联系卖家</a>
-       	 			</div>
-                    <div class="complain">
+                    <div >
+            			<a id="buy-button" style="color: white;cursor:pointer;" > 联系卖家</a>
+					</div>
+					<div>
+						<a  id="wish-button" style="color: black;cursor:pointer;" > 添加至我的愿望清单</a>
+					</div>
+
+					<div class="complain">
                     	<a href="javascript:void(0);" onclick="report(${goods.id});">•&nbsp;&nbsp;&nbsp;&nbsp;举报&nbsp;&nbsp;&nbsp;&nbsp;•</a>
                     </div>
                 </div>
@@ -87,7 +91,7 @@
             			<#if goods.student.headPic??>
             			<img id="user_ph" src="/photo/view?filename=${goods.student.headPic}">
             			<#else>
-            			<img id="user_ph" src="/home/imgs/avatar1.png">
+            			<img id="user_ph" src="/home/imgs/defult.jpeg">
             			</#if>
             		</a>
             		<p id="user_cmt">${goods.content}</p>
@@ -103,7 +107,7 @@
 								<#if ylrc_student.headPic??>
 								<img class="avatar" src="/photo/view?filename=${ylrc_student.headPic}" alt="头像"/>
 								<#else>
-								<img class="avatar" src="/home/imgs/avatar1.png" alt="头像"/>
+								<img class="avatar" src="/home/imgs/defult.jpeg" alt="头像"/>
 								</#if>
 								<div class="commenting want-commenting clearfix" >
 									<div class="comment-input-wr-wr" style="margin-right:56px;">
@@ -162,7 +166,6 @@
 	<#include "../common/bottom_footer.ftl"/> 
 <script  src="/home/js/jquery-3.1.1.min.js"></script>
 <script src="/home/js/common.js"></script>
-<script src="/home/js/add.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
    $("#buy-button").click(function(){
@@ -176,6 +179,30 @@ $(document).ready(function(){
    $("#to-login-btn").click(function(){
    		window.location.href="/home/index/login";
    });
+
+	$("#wish-button").click(function(){
+		var id = ${goods.id};
+		<#if !ylrc_student?? >
+		alert("请您先登录");
+		window.location.href="/home/index/login;
+		</#if>
+		$.ajax({
+			url: '/home/goods/add_to_wish',
+			method: 'post',
+			data:{id:id},
+			dataType:'json',
+			success:function (data){
+				if (data.code == 0){
+					alert(' 添加成功！ ');
+				}else {
+					alert(data.msg);
+				}
+			},
+			error:function (){
+				alert('网络出现错误！');
+			}
+		});
+	});
 
 	$("#submit-comment-btn").click(function(){
 		var content = $("#comment-content").val();

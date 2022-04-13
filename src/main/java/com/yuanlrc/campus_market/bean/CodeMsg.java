@@ -143,4 +143,8 @@ public class CodeMsg {
 	public static CodeMsg HOME_STUDENT_REPORTED_NO_EXIST = new CodeMsg(-40002, "举报信息不存在！");
 	//前端用户评论
 	public static CodeMsg HOME_STUDENT_COMMENT_ADD_ERROR = new CodeMsg(-50000, "评论失败，请联系管理员！");
+	//前端用户愿望清单操作失败
+	public static CodeMsg HOME_STUDENT_WISH_ADD_ERROR = new CodeMsg(-60000,"添加至愿望清单失败！");
+	public static CodeMsg HOME_STUDENT_WISH_DELETE_ERROR = new CodeMsg(-60001,"删除失败！");
+	public static CodeMsg HOME_STUDENT_WISH_EXIXT = new CodeMsg(-6002,"物品已存在");
 }

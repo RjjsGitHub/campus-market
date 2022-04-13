@@ -1,13 +1,7 @@
 $(document).ready(function(){
     login_slider();
-    // discriber();
     login_close();
-    //ershou_photo_slide();
-    //wave_move();
-    //edit_info();
-    //change_photo();
-    /*choose_sch();*/
-    //student_id();
+
     if($("#user_msg").length>0){
         grade_value_slide();
     }
