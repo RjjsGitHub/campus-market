@@ -74,16 +74,7 @@ public class HomeGoodsController {
 		try {
 			Student loginedStudent = (Student) SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
 			Goods goods = goodsService.findById(id);
-			Wish wish = new Wish();
-			wish.setLoginStudent(loginedStudent.getId());
-			wish.setPhoto(goods.getPhoto());
-			wish.setGoods(goods);
-			wish.setStudent(goods.getStudent());
-			wish.setSellPrice(goods.getSellPrice());
-			wish.setCreateTime(goods.getCreateTime());
-			wish.setUpdateTime(goods.getUpdateTime());
-			wish.setStatus(goods.getStatus());
-			wish.setName(goods.getName());
+			Wish wish = myWishServer.saveToWish(goods, loginedStudent);
 			if (myWishServer.isExit(goods.getName(),loginedStudent.getId()) != goods.getId()) {
 				myWishServer.save(wish);
 				return Result.success(true);

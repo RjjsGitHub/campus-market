@@ -24,12 +24,7 @@ public interface StudentDao extends JpaRepository<Student, Long> {
 	 * @param id
 	 * @return
 	 */
-	@Query("select s from Student s where id = :id")
+	@Query("select s from Student s where s.id = :id")
 	Student find(@Param("id")Long id);
 
-	/**
-	 * 根据物品查询
-	 */
-	@Query("select s from Student s where id = :goods")
-	Student findByGoods(Goods goods);
 }

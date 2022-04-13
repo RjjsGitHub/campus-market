@@ -27,8 +27,9 @@
                     <div class="ershou-hd">
                         <p class="ershou-title">${goods.name}</p>
                         <div class=" discount">
-                        	<span class="buy-price">原价：${goods.buyPrice}</span>
-                        	<span class="ershou-price">二手街价：${goods.sellPrice}</span>
+                        	<span class="buy-price">原价：${goods.buyPrice}元</span>
+							&emsp;&emsp;
+                        	<span class="ershou-price">二手街价：${goods.sellPrice}元</span>
                         </div>
                         <p class="bro-counts">浏览了<span>${goods.viewNumber}</span>次</p>
                     </div>
