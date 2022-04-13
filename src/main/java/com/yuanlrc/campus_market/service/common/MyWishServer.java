@@ -1,6 +1,7 @@
 package com.yuanlrc.campus_market.service.common;
 
 import com.yuanlrc.campus_market.bean.PageBean;
+import com.yuanlrc.campus_market.bean.Result;
 import com.yuanlrc.campus_market.constant.SessionConstant;
 import com.yuanlrc.campus_market.dao.common.GoodsDao;
 import com.yuanlrc.campus_market.dao.common.MyWishDao;
@@ -20,8 +21,6 @@ import java.util.Optional;
 @Service
 public class MyWishServer {
 
-    @Autowired
-    private StudentDao studentDao;
 
     @Autowired
     private GoodsDao goodsDao;
@@ -67,6 +66,25 @@ public class MyWishServer {
     }
 
 
+    /**
+     * 创建对应的wish对象 用户 添加至 数据库
+     * @param goods
+     * @param student
+     * @return
+     */
+    public Wish saveToWish(Goods goods ,Student student){
+        Wish wish = new Wish();
+        wish.setLoginStudent(student.getId());
+        wish.setPhoto(goods.getPhoto());
+        wish.setGoods(goods);
+        wish.setStudent(goods.getStudent());
+        wish.setSellPrice(goods.getSellPrice());
+        wish.setCreateTime(goods.getCreateTime());
+        wish.setUpdateTime(goods.getUpdateTime());
+        wish.setStatus(goods.getStatus());
+        wish.setName(goods.getName());
+        return wish;
+    }
 
 
 
