@@ -78,8 +78,8 @@ public class MyWishServer {
         myWishDao.deleteById(id);
     }
 
-    public Long isExit(String name){
-       return myWishDao.existsByGoodsName(name);
+    public Long isExit(String name,Long id){
+       return myWishDao.existsByGoodsName(name,id);
     }
 
     /**

@@ -21,8 +21,8 @@ public interface MyWishDao  extends JpaRepository<Wish, Long>, JpaSpecificationE
     @Query(value = "select w from Wish w where w.loginStudent = :loginStudentId")
     List<Wish> findByLoginStudent(@Param("loginStudentId")Long loginStudentId);
 
-    @Query(value = "select goods_id from ylrc_mywish where name = :name",nativeQuery=true)
-    Long existsByGoodsName(@Param("name")String name);
+    @Query(value = "select goods_id from ylrc_mywish where name = :name and login_student = :login_student",nativeQuery=true)
+    Long existsByGoodsName(@Param("name")String name,@Param("login_student")Long id);
 
 
 }
