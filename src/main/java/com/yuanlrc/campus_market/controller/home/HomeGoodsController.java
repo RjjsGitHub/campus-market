@@ -84,7 +84,7 @@ public class HomeGoodsController {
 			wish.setUpdateTime(goods.getUpdateTime());
 			wish.setStatus(goods.getStatus());
 			wish.setName(goods.getName());
-			if (myWishServer.isExit(goods.getName()) != goods.getId()) {
+			if (myWishServer.isExit(goods.getName(),loginedStudent.getId()) != goods.getId()) {
 				myWishServer.save(wish);
 				return Result.success(true);
 			}else {
