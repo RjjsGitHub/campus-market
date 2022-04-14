@@ -75,13 +75,12 @@ public class NewsService {
 
 	/**
 	 * 获取制定数量的新闻列表
-	 * @param size
+	 * @param
 	 * @return
 	 */
-	public List<News> findList(int size){
+	public List<News> findList(){
 		News news = new News();
 		PageBean<News> pageBean = new PageBean<News>();
-		pageBean.setPageSize(size);
 		return findList(pageBean, news).getContent();
 	}
 }

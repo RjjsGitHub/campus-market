@@ -47,7 +47,7 @@ public class IndexController {
 		goods.setStatus(Goods.GOODS_STATUS_UP);
 		model.addAttribute("pageBean", goodsService.findlist(pageBean, goods));
 		model.addAttribute("name",goods.getName());
-		model.addAttribute("newsList",newsService.findList(3));
+		model.addAttribute("newsList",newsService.findList());
 		return "home/index/index";
 	}
 	
