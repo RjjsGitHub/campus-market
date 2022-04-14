@@ -68,23 +68,6 @@ public class HomeGoodsController {
 		return "home/goods/detail";
 	}
 
-	@RequestMapping(value="/add_to_wish")
-	@ResponseBody
-	public Result<Boolean> addToWish(@RequestParam(name="id",required=true)Long id){
-		try {
-			Student loginedStudent = (Student) SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
-			Goods goods = goodsService.findById(id);
-			Wish wish = myWishServer.saveToWish(goods, loginedStudent);
-			if (myWishServer.isExit(goods.getName(),loginedStudent.getId()) != goods.getId()) {
-				myWishServer.save(wish);
-				return Result.success(true);
-			}else {
-				return Result.error(CodeMsg.HOME_STUDENT_WISH_EXIXT);
-			}
-		} catch (Exception e) {
-			return Result.error(CodeMsg.HOME_STUDENT_WISH_ADD_ERROR);
-		}
-	}
 
 	/**
 	 * 根据商品分类搜索商品信息
@@ -122,5 +105,29 @@ public class HomeGoodsController {
 	@ResponseBody
 	public Result<Long> getSoldTotal(){
 		return Result.success(goodsService.getSoldTotalCount());
+	}
+
+	/**
+	 * 我的愿望清单
+	 * @param id
+	 *
+	 * @return
+	 */
+	@RequestMapping(value="/add_to_wish")
+	@ResponseBody
+	public Result<Boolean> addToWish(@RequestParam(name="id",required=true)Long id){
+		try {
+			Student loginedStudent = (Student) SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
+			Goods goods = goodsService.findById(id);
+			Wish wish = myWishServer.saveToWish(goods, loginedStudent);
+			if (myWishServer.isExit(goods.getName(),loginedStudent.getId()) != goods.getId()) {
+				myWishServer.save(wish);
+				return Result.success(true);
+			}else {
+				return Result.error(CodeMsg.HOME_STUDENT_WISH_EXIXT);
+			}
+		} catch (Exception e) {
+			return Result.error(CodeMsg.HOME_STUDENT_WISH_ADD_ERROR);
+		}
 	}
 }
