@@ -192,16 +192,16 @@ function uploadPhoto(showPictureImg,input){
 					$("#show-img").show();
 					$("#"+showPictureImg).attr('src','/photo/view?filename=' + data.data);
 					$("#"+input).val(data.data);
-					
 				}else{
 					data = $.parseJSON(data);
 					alert(data.msg);
 				}
 			},
-			error:function(data){
+			error:function(){
 				alert('网络错误!');
 			}
 	});
 }
-</script>	
+</script>
+</body>
 </html>

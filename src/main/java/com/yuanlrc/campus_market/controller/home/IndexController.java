@@ -1,5 +1,6 @@
 package com.yuanlrc.campus_market.controller.home;
 
+import com.yuanlrc.campus_market.util.PassWordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ import com.yuanlrc.campus_market.service.common.NewsService;
 import com.yuanlrc.campus_market.service.common.StudentService;
 import com.yuanlrc.campus_market.util.SessionUtil;
 import com.yuanlrc.campus_market.util.ValidateEntityUtil;
+
+import java.util.UUID;
 
 /**
  * 前台首页控制器
@@ -114,6 +117,12 @@ public class IndexController {
 		if(studentService.findBySn(student.getSn()) != null){
 			return Result.error(CodeMsg.HOME_STUDENT_REGISTER_SN_EXIST);
 		}
+		//对密码加密处理
+		String salt = UUID.randomUUID().toString().toUpperCase();
+		String pwd = student.getPassword();
+		String password = PassWordUtil.getEptPassword(pwd,salt);
+		student.setPassword(password);
+		student.setSalt(salt);
 		student = studentService.save(student);
 		if(student == null){
 			return Result.error(CodeMsg.HOME_STUDENT_REGISTER_ERROR);
@@ -141,8 +150,8 @@ public class IndexController {
 		if(student == null){
 			return Result.error(CodeMsg.HOME_STUDENT_SN_NO_EXIST);
 		}
-		//表示学号存在，验证密码是否正确
-		if(!student.getPassword().equals(password)){
+		//学号存在，验证密码是否正确
+		if(!student.getPassword().equals(PassWordUtil.getEptPassword(password ,student.getSalt()))){
 			return Result.error(CodeMsg.HOME_STUDENT_PASSWORD_ERROR);
 		}
 		//验证用户状态是否被冻结

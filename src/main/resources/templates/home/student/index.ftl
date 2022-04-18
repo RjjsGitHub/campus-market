@@ -43,10 +43,10 @@
         </div>
         
         <ul class="seller_attr">
-            <li>已发布商品：<span id="goodsTotal">45</span></li>
-            <li>已出售商品：<span id = "soldGoodsTotal">4545</span></li>
-            <li>正出售商品：<span id = "upGoodsTotal">4545</span></li>
-            <li>已下架商品：<span id = "downGoodsTotal">4545</span></li>
+            <li>已发布商品：<span id="goodsTotal"></span></li>
+            <li>已出售商品：<span id = "soldGoodsTotal"></span></li>
+            <li>正出售商品：<span id = "upGoodsTotal"></span></li>
+            <li>已下架商品：<span id = "downGoodsTotal"></span></li>
             <li>待求购商品：<span id = "userpoint">${wantedGoodsList?size}</span></li>
             <li>已举报商品：<span id = "userpoint">${reportGoodsList?size}</span></li>
         </ul>

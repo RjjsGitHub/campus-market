@@ -33,12 +33,12 @@ public class Student extends BaseEntity{
 	private String password;//学生登录密码
 
 	@ValidateEntity(required=false)
+	@Column(name="salt")
+	private String salt;//密码盐值
+
+	@ValidateEntity(required=false)
 	@Column(name="head_pic",length=128)
 	private String headPic;//学生头像
-
-	@ManyToOne
-	@JoinColumn(name="wish")
-	private Wish wish;
 
 	@ValidateEntity(required=false)
 	@Column(name="nickname",length=32)
@@ -148,29 +148,12 @@ public class Student extends BaseEntity{
 		this.password = password;
 	}
 
-
-	public Wish getWish() {
-		return wish;
+	public String getSalt() {
+		return salt;
 	}
 
-	public void setWish(Wish wish) {
-		this.wish = wish;
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
-	@Override
-	public String toString() {
-		return "Student{" +
-				"sn='" + sn + '\'' +
-				", password='" + password + '\'' +
-				", headPic='" + headPic + '\'' +
-				", wish=" + wish +
-				", nickname='" + nickname + '\'' +
-				", mobile='" + mobile + '\'' +
-				", qq='" + qq + '\'' +
-				", school='" + school + '\'' +
-				", academy='" + academy + '\'' +
-				", grade='" + grade + '\'' +
-				", status=" + status +
-				'}';
-	}
 }

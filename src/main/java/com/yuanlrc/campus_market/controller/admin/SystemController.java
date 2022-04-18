@@ -2,9 +2,11 @@ package com.yuanlrc.campus_market.controller.admin;
 
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.yuanlrc.campus_market.util.PassWordUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +92,7 @@ public class SystemController {
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
-	public Result<Boolean> login(HttpServletRequest request,User user,String cpacha){
+	public Result<Boolean> login(HttpServletRequest request,User user,String cpacha ,@RequestParam(name="password",required=true)String password){
 		if(user == null){
 			return Result.error(CodeMsg.DATA_ERROR);
 		}
@@ -119,7 +121,8 @@ public class SystemController {
 			return Result.error(CodeMsg.ADMIN_USERNAME_NO_EXIST);
 		}
 		//表示用户存在，进一步对比密码是否正确
-		if(!findByUsername.getPassword().equals(user.getPassword())){
+		if(!findByUsername.getPassword().equals(PassWordUtil.getEptPassword(password ,findByUsername.getSalt())
+		)){
 			return Result.error(CodeMsg.ADMIN_PASSWORD_ERROR);
 		}
 		//表示密码正确，接下来判断用户状态是否可用
@@ -233,13 +236,16 @@ public class SystemController {
 			@RequestParam(name="newPwd",required=true)String newPwd
 			){
 		User loginedUser = SessionUtil.getLoginedUser();
-		if(!loginedUser.getPassword().equals(oldPwd)){
+		if(!loginedUser.getPassword().equals(PassWordUtil.getEptPassword(oldPwd ,loginedUser.getSalt()))){
 			return Result.error(CodeMsg.ADMIN_USER_UPDATE_PWD_ERROR);
 		}
 		if(StringUtils.isEmpty(newPwd)){
 			return Result.error(CodeMsg.ADMIN_USER_UPDATE_PWD_EMPTY);
 		}
-		loginedUser.setPassword(newPwd);
+		String newSalt = UUID.randomUUID().toString().toUpperCase();
+		String eptPassword = PassWordUtil.getEptPassword(newPwd, newSalt);
+		loginedUser.setPassword(eptPassword);
+		loginedUser.setSalt(newSalt);
 		//保存数据库
 		userService.save(loginedUser);
 		//更新session

@@ -68,6 +68,10 @@ public class User extends BaseEntity{
 	@Column(name="email",length=32)
 	private String email;//用户邮箱
 
+	@ValidateEntity(required=false)
+	@Column(name="salt")
+	private String salt;//密码盐值
+
 	public String getUsername() {
 		return username;
 	}
@@ -132,15 +136,11 @@ public class User extends BaseEntity{
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "User [role=" + role + ", username=" + username + ", password="
-				+ password + ", status=" + status + ", headPic=" + headPic
-				+ ", sex=" + sex + ", mobile=" + mobile + ", email=" + email
-				+ "]";
+	public String getSalt() {
+		return salt;
 	}
 
-	
-	
-	
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 }

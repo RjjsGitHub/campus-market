@@ -13,6 +13,7 @@ import com.yuanlrc.campus_market.service.admin.OperaterLogService;
 import com.yuanlrc.campus_market.service.admin.RoleService;
 import com.yuanlrc.campus_market.service.admin.UserService;
 import com.yuanlrc.campus_market.util.MenuUtil;
+import com.yuanlrc.campus_market.util.PassWordUtil;
 import com.yuanlrc.campus_market.util.ValidateEntityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("/admin/user")
 @Controller
@@ -77,12 +79,16 @@ public class UserController {
      */
     @RequestMapping(value="/add",method=RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> add(User user){
+    public Result<Boolean> add(User user ,@RequestParam(name="password",required=true)String password){
         //用统一验证实体方法验证是否合法
         CodeMsg validate = ValidateEntityUtil.validate(user);
         if(validate.getCode() != CodeMsg.SUCCESS.getCode()){
             return Result.error(validate);
         }
+        String salt = UUID.randomUUID().toString().toUpperCase();
+        String eptPassword = PassWordUtil.getEptPassword(password, salt);
+        user.setPassword(eptPassword);
+        user.setSalt(salt);
         if(userService.save(user) == null){
             return Result.error(CodeMsg.ADMIN_ROLE_ADD_ERROR);
         }
@@ -112,7 +118,7 @@ public class UserController {
      */
     @RequestMapping(value="/edit",method=RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> edit(User user){
+    public Result<Boolean> edit(User user ,@RequestParam(name="password",required=true)String password){
         //用统一验证实体方法验证是否合法
         CodeMsg validate = ValidateEntityUtil.validate(user);
         if(validate.getCode() != CodeMsg.SUCCESS.getCode()){
@@ -122,9 +128,14 @@ public class UserController {
         if(existUser == null){
             return Result.error(CodeMsg.ADMIN_ROLE_NO_EXIST);
         }
+
+        String newsalt = UUID.randomUUID().toString().toUpperCase();
+        String newPassword = PassWordUtil.getEptPassword(password, newsalt);
+
         existUser.setHeadPic(user.getHeadPic());
         existUser.setUsername(user.getUsername());
-        existUser.setPassword(user.getPassword());
+        existUser.setPassword(newPassword);
+        existUser.setSalt(newsalt);
         existUser.setRole(user.getRole());
         existUser.setMobile(user.getMobile());
         existUser.setEmail(user.getEmail());

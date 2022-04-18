@@ -19,16 +19,19 @@
                     <div class="form-must-wr">
                         <div class="form-item l goods-title">
                             <div class="form-key">
-                                <span>商品名称</span></div>
+                                <span>商品名称</span>
+                            </div>
                             <div class="form-value">
                                 <div class="form-input-wr">
-                                    <input id="name" name="name" placeholder="最多18个字" maxlength="18" value="" type="text" class="required" tips="请填写商品名称"></div>
+                                    <input id="name" name="name" placeholder="最多18个字" maxlength="18" value="" type="text" class="required" tips="请填写商品名称">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="form-item xl goods-desc">
                             <div class="form-key">
-                                <span>商品详情</span></div>
+                                <span>商品详情</span>
+                            </div>
                             <div class="form-value">
                                 <div class="form-input-wr">
                                     <textarea name="content" id="desc" placeholder="建议填写物品用途、新旧程度、原价等信息，至少15个字" class="required" tips="请填写详情描述"></textarea>
@@ -39,7 +42,8 @@
                         
                         <div class="form-item l goods-title">
                             <div class="form-key">
-                                <span>期望交易地点</span></div>
+                                <span>期望交易地点</span>
+                            </div>
                             <div class="form-value">
                                 <div class="form-input-wr">
                                     <input class="required" id="tradePlace" name="tradePlace" value="" type="text" tips="请填写期望交易地点"></div>
@@ -93,5 +97,6 @@ $(document).ready(function(){
 
 });
 
-</script>	
+</script>
+</body>
 </html>

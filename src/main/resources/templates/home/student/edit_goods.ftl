@@ -208,5 +208,6 @@ function uploadPhoto(showPictureImg,input){
 			}
 	});
 }
-</script>	
+</script>
+</body>
 </html>

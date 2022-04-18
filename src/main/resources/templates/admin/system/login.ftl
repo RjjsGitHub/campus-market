@@ -75,7 +75,7 @@
       </form>
       <hr>
       <footer class="col-sm-12 text-center">
-        <p class="m-b-0">Copyright © 2022 <a href="${siteUrl!""}">【三峡二手】</a>. All right reserved</p>
+        <p class="m-b-0">Copyright © 2022 <a href="${siteUrl!""}">【三峡二手交易网后台管理系统】</a></p>
       </footer>
     </div>
   </div>

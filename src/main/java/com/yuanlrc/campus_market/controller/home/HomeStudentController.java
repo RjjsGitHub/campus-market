@@ -3,14 +3,13 @@ package com.yuanlrc.campus_market.controller.home;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import com.yuanlrc.campus_market.util.PassWordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.yuanlrc.campus_market.bean.CodeMsg;
 import com.yuanlrc.campus_market.bean.Result;
@@ -55,7 +54,7 @@ public class HomeStudentController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@GetMapping("/index")
 	public String index(Model model){
 		Student loginedStudent = (Student)SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
 		model.addAttribute("goodsList", goodsService.findByStudent(loginedStudent));
@@ -69,7 +68,7 @@ public class HomeStudentController {
 	 * @param student
 	 * @return
 	 */
-	@RequestMapping(value="/edit_info",method=RequestMethod.POST)
+	@PostMapping("/edit_info")
 	@ResponseBody
 	public Result<Boolean> editInfo(Student student){
 		Student loginedStudent = (Student)SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
@@ -448,10 +447,14 @@ public class HomeStudentController {
 	public Result<Boolean> editPwd(@RequestParam(name="oldPwd",required=true)String oldPwd,
 			@RequestParam(name="newPwd",required=true)String newPwd){
 		Student loginedStudent = (Student)SessionUtil.get(SessionConstant.SESSION_STUDENT_LOGIN_KEY);
-		if(!loginedStudent.getPassword().equals(oldPwd)){
+		if(!loginedStudent.getPassword().equals(PassWordUtil.getEptPassword(oldPwd,loginedStudent.getSalt()))){
 			return Result.error(CodeMsg.HOME_STUDENT_EDITPWD_OLD_ERROR);
 		}
-		loginedStudent.setPassword(newPwd);
+		//生成新的盐值
+		String newSalt = UUID.randomUUID().toString().toUpperCase();
+		String eptPassword = PassWordUtil.getEptPassword(newPwd, newSalt);
+		loginedStudent.setSalt(newSalt);
+		loginedStudent.setPassword(eptPassword);
 		if(studentService.save(loginedStudent) == null){
 			return Result.error(CodeMsg.HOME_STUDENT_EDITINFO_ERROR);
 		}
