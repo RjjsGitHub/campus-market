@@ -14,9 +14,6 @@
         <div class="main center clearfix">
             <div class="ershou-details">
                 <div class="ershou-photos-wr">
-	            		 <!-- 收藏功能
-	                    <a class="ershou-favorite" href="javascript:void(0);" style="background-image: url('heart.png');" onclick="favorites();">0</a> -->
-                       <!-- 轮播大图-->
                         <div class="bigger-photo-box">
                         	<a class="bigger-photo hide show" rel="img_group" href="">
                         		<img class="bigger" src="/photo/view?filename=${goods.photo}"  alt="${goods.name}">
