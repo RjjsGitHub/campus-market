@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 /**
  * 数据库备份service
  */
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.yuanlrc.campus_market.bean.PageBean;
@@ -45,7 +46,8 @@ public class DatabaseBakService {
 	 * @return
 	 */
 	public PageBean<DatabaseBak> findList(PageBean<DatabaseBak> pageBean){
-		Pageable pageable = PageRequest.of(pageBean.getCurrentPage()-1, pageBean.getPageSize());
+		Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
+		Pageable pageable = PageRequest.of(pageBean.getCurrentPage()-1, pageBean.getPageSize(),sort);
 		Page<DatabaseBak> findAll = databaseBakDao.findAll(pageable);
 		pageBean.setContent(findAll.getContent());
 		pageBean.setTotal(findAll.getTotalElements());
