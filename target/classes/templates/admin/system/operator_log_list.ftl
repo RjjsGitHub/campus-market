@@ -65,9 +65,9 @@ td{
                     <thead>
                       <tr>
                         <th>
-                          <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" id="check-all"><span></span>
-                          </label>
+<#--                          <label class="lyear-checkbox checkbox-primary">-->
+<#--                            <input type="checkbox" id="check-all"><span></span>-->
+<#--                          </label>-->
                         </th>
                         <th>操作者</th>
                         <th style="width:400px;">操作内容</th>

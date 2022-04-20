@@ -571,6 +571,7 @@ button.list-group-item:hover {
     min-height: 18px;
     height: auto!important;
     line-height: 18px!important;
+    color: #ecd5a7;
 }
 input[type=checkbox],
 input[type=radio] {

@@ -20,7 +20,7 @@ td{
       
       <!-- logo -->
       <div id="logo" class="sidebar-header">
-        <a href="index.html"><img src="/admin/images/logo-sidebar.png" title="${siteName!""}" alt="${siteName!""}" /></a>
+        <a href="index.html"><img src="/admin/images/sxlogo.png" title="${siteName!""}" alt="${siteName!""}" /></a>
       </div>
       <div class="lyear-layout-sidebar-scroll"> 
         <#include "../common/left-menu.ftl"/>
@@ -65,9 +65,9 @@ td{
                     <thead>
                       <tr>
                         <th>
-                          <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" id="check-all"><span></span>
-                          </label>
+<#--                          <label class="lyear-checkbox checkbox-primary">-->
+<#--                            <input type="checkbox" id="check-all"><span></span>-->
+<#--                          </label>-->
                         </th>
                         <th>标题</th>
                         <th style="width:256px">内容</th>
