@@ -115,7 +115,7 @@ public class DatabaseBakService {
 			try {
 				String filename = databaseBak.getFilename();
 				File file = new File(databaseBak.getFilepath() + databaseBak.getFilename());
-				String cmd = "mysql -u"+dbUsername+" -p"+dbPwd+" "+dbName+" < " + backUpDir + filename;;
+				String cmd = "mysql -u"+dbUsername+" -p"+dbPwd+" "+dbName+" < " + backUpDir + filename;
 				if(!file.exists()){
 					cmd = "mysql -u"+dbUsername+" -p"+dbPwd+" "+dbName+" < " + databaseBak.getFilepath() + databaseBak.getFilename();
 				}
