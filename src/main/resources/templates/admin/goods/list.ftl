@@ -137,15 +137,21 @@ td{
                 <#if pageBean.total gt 0>
                 <ul class="pagination ">
                   <#if pageBean.currentPage == 1>
-                  <li class="disabled"><span>«</span></li>
+                    <li class="disabled"><span>«</span></li>
+                  <#else>
+                    <li><a href="list?name=${name!""}&currentPage=1">«</a></li>
                   </#if>
                   <#list pageBean.currentShowPage as showPage>
                   <#if pageBean.currentPage == showPage>
                   <li class="active"><span>${showPage}</span></li>
+                  <#else>
+                    <li><a href="list?name=${name!""}&currentPage=${showPage}">${showPage}</a></li>
                   </#if>
                   </#list>
                   <#if pageBean.currentPage == pageBean.totalPage>
-                  <li class="disabled"><span>»</span></li>
+                    <li class="disabled"><span>»</span></li>
+                  <#else>
+                    <li><a href="list?name=${name!""}&currentPage=${pageBean.totalPage}">»</a></li>
                   </#if>
                   <li><span>共${pageBean.totalPage}页,${pageBean.total}条数据</span></li>
                 </ul>

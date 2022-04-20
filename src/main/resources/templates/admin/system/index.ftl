@@ -62,7 +62,7 @@
               <div class="card-body clearfix">
                 <div class="pull-right">
                   <p class="h6 text-white m-t-0">管理员当前在线用户</p>
-                  <p class="h3 text-white m-b-0">${onlineUserTotal!"0"}</p>
+                  <p class="h3 text-white m-b-0">${onlineUserTotal!"1"}</p>
                 </div>
                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-account-multiple fa-1-5x"></i></span> </div>
               </div>

@@ -13,7 +13,7 @@ public class SessionListener implements HttpSessionListener {
 	
 	private Logger log = LoggerFactory.getLogger(SessionListener.class);
 	
-	public static long onlineUserCount = 0;
+	public static long onlineUserCount = 1;
 	
 	@Override
 	public void sessionCreated(HttpSessionEvent se){
