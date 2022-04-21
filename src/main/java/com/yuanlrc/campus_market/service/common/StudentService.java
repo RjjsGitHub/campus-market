@@ -2,8 +2,6 @@ package com.yuanlrc.campus_market.service.common;
 /**
  * 学生信息操作service
  */
-import com.yuanlrc.campus_market.dao.common.GoodsDao;
-import com.yuanlrc.campus_market.entity.common.ReportGoods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -18,15 +16,12 @@ import com.yuanlrc.campus_market.bean.PageBean;
 import com.yuanlrc.campus_market.dao.common.StudentDao;
 import com.yuanlrc.campus_market.entity.common.Student;
 
-import java.util.Optional;
-
 @Service
 public class StudentService {
 
 	@Autowired
 	private StudentDao studentDao;
-
-
+	
 	/**
 	 * 根据学号查询
 	 * @param sn

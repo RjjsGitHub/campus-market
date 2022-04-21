@@ -6,6 +6,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.yuanlrc.campus_market.annotion.ValidateEntity;
 
+import java.io.Serializable;
+
 /**
  * 学生实体类
  * @author Administrator
@@ -14,7 +16,7 @@ import com.yuanlrc.campus_market.annotion.ValidateEntity;
 @Entity
 @Table(name="ylrc_studnet")
 @EntityListeners(AuditingEntityListener.class)
-public class Student extends BaseEntity{
+public class Student extends BaseEntity implements Serializable {
 
 	public static final int STUDENT_STATUS_ENABLE = 1;//状态可用
 	public static final int STUDENT_STATUS_UNABLE = 0;//状态不可用

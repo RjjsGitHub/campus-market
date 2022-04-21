@@ -1,4 +1,5 @@
 package com.yuanlrc.campus_market.service.common;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.yuanlrc.campus_market.dao.common.KillProductDao;
+import com.yuanlrc.campus_market.dao.common.StudentDao;
+import com.yuanlrc.campus_market.entity.KillStates;
+import com.yuanlrc.campus_market.entity.common.KillProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +33,30 @@ public class GoodsService {
 
 	@Autowired
 	private GoodsDao goodsDao;
+
+	@Autowired
+	private StudentDao studentDao;
+
+	@Autowired
+	private KillProductServer killProductServer;
+
+
+
+	public Goods killProduct(Goods goods, Student student) {
+		 if (!goodsDao.existsById(goods.getId())){
+			 return null;
+		 }
+		 goodsDao.deleteById(goods.getId());
+
+		KillProduct killProduct = new KillProduct();
+		killProduct.setCreateTime(new Date());
+		killProduct.setStudent(student);
+		killProduct.setGoods(goods);
+		killProduct.setState(KillStates.SUCCESS.getCode());
+		killProductServer.save(killProduct);
+
+		return goods;
+	}
 	
 	/**
 	 * 物品添加/编辑，当id不为空时，则编辑

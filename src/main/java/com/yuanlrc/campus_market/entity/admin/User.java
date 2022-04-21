@@ -12,6 +12,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.yuanlrc.campus_market.annotion.ValidateEntity;
 import com.yuanlrc.campus_market.entity.common.BaseEntity;
 
+import java.io.Serializable;
+
 /**
  * 后台用户实体类
  * @author Administrator
@@ -20,7 +22,7 @@ import com.yuanlrc.campus_market.entity.common.BaseEntity;
 @Entity
 @Table(name="ylrc_user")
 @EntityListeners(AuditingEntityListener.class)
-public class User extends BaseEntity{
+public class User extends BaseEntity implements Serializable {
 
 	/**
 	 * 

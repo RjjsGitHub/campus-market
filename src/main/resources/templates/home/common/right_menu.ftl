@@ -8,12 +8,16 @@
             <a  href="/home/student/publish" style="color: white" id="want-sale"> 我要卖</a>
         </div>       
         <br><br>
-        <div id="release-button3" >
+        <div id="release-button4" >
             <a href="/home/wanted_goods/list" style="color: white"> 求购专区</a>
         </div>
          <br><br>
-        <div id="release-button4" >
+        <div id="release-button3" >
             <a  href="/home/my_wish/list" style="color: white" id="my-wish"> 我的愿望清单</a>
+        </div>
+         <br><br>
+        <div id="release-button5" >
+            <a  href="/home/kill/list" style="color: white" id="kill"> 秒杀</a>
         </div>
 
         <div class="helped ">

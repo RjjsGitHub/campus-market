@@ -22,6 +22,7 @@ import com.yuanlrc.campus_market.bean.Result;
 import com.yuanlrc.campus_market.entity.common.Goods;
 import com.yuanlrc.campus_market.entity.common.GoodsCategory;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -44,6 +45,33 @@ public class HomeGoodsController {
 	private StudentService studentService;
 	@Autowired
 	private MyWishServer myWishServer;
+
+	/**
+	 * 秒杀
+	 * @param model
+	 * @param goodsid
+	 * @param studentid
+	 * @return
+	 */
+	@RequestMapping(value = "/kill")
+	public String KillProduct(
+			Model model ,
+			@RequestParam(name="goodsid", required=true)Long goodsid ,
+			@RequestParam(name="studentid",required=true)Long studentid){
+
+		Student student = studentService.findById(studentid);
+		Goods goods = goodsService.findById(goodsid);
+
+		model.addAttribute("killgoods",goods);
+
+		Goods killProductgoods = goodsService.killProduct(goods, student);
+		if (killProductgoods != null){
+			return "success";
+		}
+		return "fail";
+	}
+
+
 	/**
 	 * 物品详情页面
 	 * @param id

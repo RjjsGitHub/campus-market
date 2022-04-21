@@ -16,7 +16,7 @@
       
       <!-- logo -->
       <div id="logo" class="sidebar-header">
-        <a href="index.html"><img src="/admin/images/logo-sidebar.png" title="${siteName!""}" alt="${siteName!""}" /></a>
+        <a href="index.html"><img src="/admin/images/sxlogo.png" title="${siteName!""}" alt="${siteName!""}" /></a>
       </div>
       <div class="lyear-layout-sidebar-scroll"> 
         <#include "../common/left-menu.ftl"/>

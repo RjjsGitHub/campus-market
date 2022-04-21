@@ -121,8 +121,8 @@ public class SystemController {
 			return Result.error(CodeMsg.ADMIN_USERNAME_NO_EXIST);
 		}
 		//表示用户存在，进一步对比密码是否正确
-		if(!findByUsername.getPassword().equals(PassWordUtil.getEptPassword(password ,findByUsername.getSalt())
-		)){
+		if(!findByUsername.getPassword().equals(PassWordUtil.getEptPassword(password ,findByUsername.getSalt()))
+		){
 			return Result.error(CodeMsg.ADMIN_PASSWORD_ERROR);
 		}
 		//表示密码正确，接下来判断用户状态是否可用
