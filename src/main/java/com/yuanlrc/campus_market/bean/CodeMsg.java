@@ -132,6 +132,7 @@ public class CodeMsg {
 	//前端用户中心错误码
 	public static CodeMsg HOME_STUDENT_EDITINFO_ERROR = new CodeMsg(-20000, "基本信息修改失败，请联系管理员！");
 	public static CodeMsg HOME_STUDENT_EDITPWD_OLD_ERROR = new CodeMsg(-20001, "原密码错误！");
+	public static CodeMsg HOME_STUDENT_EDITPWD_NOTHING = new CodeMsg(-2002,"密码并未修改！");
 	//前端用户发布物品错误码
 	public static CodeMsg HOME_STUDENT_PUBLISH_ERROR = new CodeMsg(-30000, "物品发布失败，请联系管理员！");
 	public static CodeMsg HOME_STUDENT_GOODS_EDIT_ERROR = new CodeMsg(-30001, "物品发布失败，请联系管理员！");

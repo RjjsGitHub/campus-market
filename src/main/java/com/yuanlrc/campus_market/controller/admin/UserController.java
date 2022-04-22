@@ -134,8 +134,11 @@ public class UserController {
 
         existUser.setHeadPic(user.getHeadPic());
         existUser.setUsername(user.getUsername());
-        existUser.setPassword(newPassword);
-        existUser.setSalt(newsalt);
+        //未更改密码
+        if (!user.getPassword().equals(password)){
+            existUser.setPassword(newPassword);
+            existUser.setSalt(newsalt);
+        }
         existUser.setRole(user.getRole());
         existUser.setMobile(user.getMobile());
         existUser.setEmail(user.getEmail());

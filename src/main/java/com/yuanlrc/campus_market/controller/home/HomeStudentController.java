@@ -450,11 +450,16 @@ public class HomeStudentController {
 		if(!loginedStudent.getPassword().equals(PassWordUtil.getEptPassword(oldPwd,loginedStudent.getSalt()))){
 			return Result.error(CodeMsg.HOME_STUDENT_EDITPWD_OLD_ERROR);
 		}
-		//生成新的盐值
+		//生成新的盐值，密码
 		String newSalt = UUID.randomUUID().toString().toUpperCase();
 		String eptPassword = PassWordUtil.getEptPassword(newPwd, newSalt);
-		loginedStudent.setSalt(newSalt);
-		loginedStudent.setPassword(eptPassword);
+		//未更改密码
+		if (!loginedStudent.getPassword().equals(PassWordUtil.getEptPassword(newPwd,loginedStudent.getSalt()))){
+			loginedStudent.setSalt(newSalt);
+			loginedStudent.setPassword(eptPassword);
+		}else {
+			return Result.error(CodeMsg.HOME_STUDENT_EDITPWD_NOTHING);
+		}
 		if(studentService.save(loginedStudent) == null){
 			return Result.error(CodeMsg.HOME_STUDENT_EDITINFO_ERROR);
 		}
