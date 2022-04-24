@@ -78,60 +78,61 @@ td{
                     </tr>
                     </thead>
                     <tbody>
-                    <#if pageBean.content?size gt 0>
-                      <#list pageBean.content as killproduct>
-                        <tr>
-                          <td style="vertical-align:middle;">
-                            <label class="lyear-checkbox checkbox-primary">
-                              <input type="checkbox" name="ids[]" value="${killproduct.id}"><span></span>
-                            </label>
-                          </td>
-                          <td style="vertical-align:middle;">
-                            <#if killproduct.icon??>
-                              <#if killproduct.icon?length gt 0>
-                                <img src="/photo/view?filename=${killproduct.}" width="30px" height="30px">
-                              <#else>
-                                <img src="/admin/images/default-category-icon.png" width="30px" height="30px">
-                              </#if>
-                            </#if>
-                          </td>
-                          <td style="vertical-align:middle;">${killproduct.name}</td>
-                          <td style="vertical-align:middle;">
-                            <#if killproduct.parent??>
-                              ${killproduct.parent.name}
-                            </#if>
-                          </td>
-                          <td style="vertical-align:middle;" align="center">${killproduct.sort}</td>
-                          <td style="vertical-align:middle;" style="vertical-align:middle;"><font class="text-success">${killproduct.createTime}</font></td>
-                        </tr>
-                      </#list>
+                      <#if pageBean.content?size gt 0>
+                      <#list pageBean.content as kill_product>
+                      <tr>
+                        <td style="vertical-align:middle;">
+                          <label class="lyear-checkbox checkbox-primary">
+                            <input type="checkbox" name="ids[]" value="${kill_product.id}"><span></span>
+                          </label>
+                        </td>
+                        <td style="vertical-align:middle;">
+                        	<#if kill_product.goodsPhoto??>
+                        		<#if kill_product.goodsPhoto?length gt 0>
+                        		<img src="/photo/view?filename=${kill_product.goodsPhoto}" width="60px" height="60px">
+                        		</#if>
+                        	</#if>
+                        </td>
+                        <td style="vertical-align:middle;">${kill_product.getGoodsName()}</td>
+                        <td style="vertical-align:middle;">${kill_product.student.getNickname()}</td>
+                        <td style="vertical-align:middle;">-
+                          ${kill_product.state}
+<#--                        	<#if kill_product.status == -1>-->
+<#--                        	<font class="text-success">无效</font>-->
+<#--                        	</#if>-->
+                        </td>
+                        <td style="vertical-align:middle;" style="vertical-align:middle;"><font class="text-success">${kill_product.startTime}</font></td>
+                        <td style="vertical-align:middle;" style="vertical-align:middle;"><font class="text-success">${kill_product.endTime}</font></td>
+                        <td style="vertical-align:middle;" style="vertical-align:middle;"><font class="text-success">${kill_product.createTime}</font></td>
+                      </tr>
+                    </#list>
                     <#else>
-                      <tr align="center"><td colspan="6">这里空空如也！</td></tr>
-                    </#if>
+                    <tr align="center"><td colspan="9">这里空空如也！</td></tr>
+					</#if>
                     </tbody>
                   </table>
                 </div>
                 <#if pageBean.total gt 0>
-                  <ul class="pagination ">
-                    <#if pageBean.currentPage == 1>
-                      <li class="disabled"><span>«</span></li>
-                    <#else>
-                      <li><a href="list?name=${name!""}&currentPage=1">«</a></li>
-                    </#if>
-                    <#list pageBean.currentShowPage as showPage>
-                      <#if pageBean.currentPage == showPage>
-                        <li class="active"><span>${showPage}</span></li>
-                      <#else>
-                        <li><a href="list?name=${name!""}&currentPage=${showPage}">${showPage}</a></li>
-                      </#if>
-                    </#list>
-                    <#if pageBean.currentPage == pageBean.totalPage>
-                      <li class="disabled"><span>»</span></li>
-                    <#else>
-                      <li><a href="list?name=${name!""}&currentPage=${pageBean.totalPage}">»</a></li>
-                    </#if>
-                    <li><span>共${pageBean.totalPage}页,${pageBean.total}条数据</span></li>
-                  </ul>
+                <ul class="pagination ">
+                  <#if pageBean.currentPage == 1>
+                  <li class="disabled"><span>«</span></li>
+                  <#else>
+                  <li><a href="list?username=${username!""}&currentPage=1">«</a></li>
+                  </#if>
+                  <#list pageBean.currentShowPage as showPage>
+                  <#if pageBean.currentPage == showPage>
+                  <li class="active"><span>${showPage}</span></li>
+                  <#else>
+                  <li><a href="list?username=${username!""}&currentPage=${showPage}">${showPage}</a></li>
+                  </#if>
+                  </#list>
+                  <#if pageBean.currentPage == pageBean.totalPage>
+                  <li class="disabled"><span>»</span></li>
+                  <#else>
+                  <li><a href="list?username=${username!""}&currentPage=${pageBean.totalPage}">»</a></li>
+                  </#if>
+                  <li><span>共${pageBean.totalPage}页,${pageBean.total}条数据</span></li>
+                </ul>
                 </#if>
               </div>
             </div>
@@ -149,7 +150,63 @@ td{
 <script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="/admin/js/main.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
 
+});
+function del(url){
+	if($("input[type='checkbox']:checked").length != 1){
+		showWarningMsg('请选择一条数据进行删除！');
+		return;
+	}
+	var id = $("input[type='checkbox']:checked").val();
+	$.confirm({
+        title: '确定删除？',
+        content: '删除后数据不可恢复，请慎重！',
+        buttons: {
+            confirm: {
+                text: '确认',
+                action: function(){
+                    deleteReq(id,url);
+                }
+            },
+            cancel: {
+                text: '关闭',
+                action: function(){
+
+                }
+            }
+        }
+    });
+}
+//打开编辑页面
+function edit(url){
+	if($("input[type='checkbox']:checked").length != 1){
+		showWarningMsg('请选择一条数据进行编辑！');
+		return;
+	}
+	window.location.href = url + '?id=' + $("input[type='checkbox']:checked").val();
+}
+//调用删除方法
+function deleteReq(id,url){
+	$.ajax({
+		url:url,
+		type:'POST',
+		data:{id:id},
+		dataType:'json',
+		success:function(data){
+			if(data.code == 0){
+				showSuccessMsg('用户删除成功!',function(){
+					$("input[type='checkbox']:checked").parents("tr").remove();
+				})
+			}else{
+				showErrorMsg(data.msg);
+			}
+		},
+		error:function(data){
+			alert('网络错误!');
+		}
+	});
+}
 </script>
 </body>
 </html>

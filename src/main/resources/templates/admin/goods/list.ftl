@@ -272,6 +272,14 @@ function deleteReq(id,url){
 		}
 	});
 }
+//打开秒杀发布页面
+function add_kill(url){
+  if($("input[type='checkbox']:checked").length != 1){
+    showWarningMsg('请选择一条数据进行编辑！');
+    return;
+  }
+  window.location.href = url + '?id=' + $("input[type='checkbox']:checked").val();
+}
 </script>
 </body>
 </html>

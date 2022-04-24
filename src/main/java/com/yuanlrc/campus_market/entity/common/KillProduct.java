@@ -25,9 +25,9 @@ public class KillProduct extends BaseEntity implements Serializable {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne
-    @JoinColumn(name = "goods_id")
-    private Goods goods;
+    @ValidateEntity(required=false)
+    @Column(name="goods_name",nullable=false)
+    private String goodsName;
 
     @ValidateEntity(required=false)
     @Column(name="state")
@@ -41,6 +41,10 @@ public class KillProduct extends BaseEntity implements Serializable {
     @Column(name="end_time",nullable=false)
     private Date endTime;//创建时间
 
+    @ValidateEntity(required=false)
+    @Column(name="goods_photo",nullable=false)
+    private String goodsPhoto;//创建时间
+
     public Student getStudent() {
         return student;
     }
@@ -49,12 +53,20 @@ public class KillProduct extends BaseEntity implements Serializable {
         this.student = student;
     }
 
-    public Goods getGoods() {
-        return goods;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setGoods(Goods goods) {
-        this.goods = goods;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getGoodsPhoto() {
+        return goodsPhoto;
+    }
+
+    public void setGoodsPhoto(String goodsPhoto) {
+        this.goodsPhoto = goodsPhoto;
     }
 
     public int getState() {

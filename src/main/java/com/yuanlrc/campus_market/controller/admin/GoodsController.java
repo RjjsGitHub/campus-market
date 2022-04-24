@@ -1,14 +1,16 @@
 package com.yuanlrc.campus_market.controller.admin;
 
+import java.util.Date;
 import java.util.List;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.yuanlrc.campus_market.entity.common.KillProduct;
+import com.yuanlrc.campus_market.service.common.KillProductServer;
+import com.yuanlrc.campus_market.util.ValidateEntityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.yuanlrc.campus_market.bean.CodeMsg;
 import com.yuanlrc.campus_market.bean.PageBean;
@@ -35,6 +37,8 @@ public class GoodsController {
 	private GoodsService goodsService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private KillProductServer killProductServer;
 	
 	/**
 	 * 物品管理列表页面
@@ -141,6 +145,39 @@ public class GoodsController {
 			goodsService.delete(id);
 		} catch (Exception e) {
 			return Result.error(CodeMsg.ADMIN_GOODS_DELETE_ERROR);
+		}
+		return Result.success(true);
+	}
+
+	/**
+	 * 秒杀添加页面
+	 * @param
+	 * @return
+	 */
+	@RequestMapping(value="/add_kill",method= RequestMethod.GET)
+	public String add_kill(Model model,@RequestParam(name="id",required=true)Long id){
+		model.addAttribute("goods",goodsService.findById(id));
+		return "admin/goods/add_kill";
+	}
+
+	/**
+	 * 秒杀添加页面
+	 * @param
+	 * @return
+	 */
+	@PostMapping(value = "/add_kill")
+	@ResponseBody
+	public Result<Boolean> add_kill(KillProduct killProduct ) {
+		CodeMsg validate = ValidateEntityUtil.validate(killProduct);
+		if(validate.getCode() != CodeMsg.SUCCESS.getCode()){
+			return Result.error(validate);
+		}
+		killProduct.setGoodsName(killProduct.getGoodsName());
+		killProduct.setGoodsPhoto(killProduct.getGoodsPhoto());
+		killProduct.setStartTime(killProduct.getStartTime());
+		killProduct.setEndTime(killProduct.getEndTime());
+		if(killProductServer.save(killProduct) == null){
+			return Result.error(CodeMsg.ADMIN_ROLE_ADD_ERROR);
 		}
 		return Result.success(true);
 	}

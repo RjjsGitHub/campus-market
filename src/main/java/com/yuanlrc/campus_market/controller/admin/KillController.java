@@ -33,7 +33,7 @@ public class KillController {
     @RequestMapping(value="/list")
     public String list(KillProduct killProduct, PageBean<KillProduct> pageBean, Model model){
         model.addAttribute("title", "秒杀发布管理");
-        model.addAttribute("name", killProduct.getGoods().getName());
+        model.addAttribute("name", killProduct.getGoodsName());
         model.addAttribute("pageBean", killProductServer.findlist(pageBean, killProduct));
         return "admin/kill/list";
     }

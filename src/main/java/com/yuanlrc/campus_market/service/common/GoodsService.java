@@ -51,7 +51,7 @@ public class GoodsService {
 		KillProduct killProduct = new KillProduct();
 		killProduct.setCreateTime(new Date());
 		killProduct.setStudent(student);
-		killProduct.setGoods(goods);
+		killProduct.setGoodsName(goods.getName());
 		killProduct.setState(KillStates.SUCCESS.getCode());
 		killProductServer.save(killProduct);
 
