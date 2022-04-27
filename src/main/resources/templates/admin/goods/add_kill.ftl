@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>${siteName!""}|秒杀发布-</title>
 <#include "../common/header.ftl"/>
-
 </head>
   
 <body>
@@ -40,23 +39,20 @@
                 <form action="add_kill.ftl" id="kill-add-form" method="post" class="row">
                   <div class="input-group m-b-10">
                     <span class="input-group-addon">秒杀物品</span>
-                    <input type="text"  class="form-control" id="goods" name="goods_name" value="${goods.name}"/>
-                    <li class="col-xs-4 col-sm-3 col-md-2">
-                      <figure>
-                          <img src="/photo/view?filename=${goods.photo}" id="goods_photo" name="goods_photo">
-                      </figure>
-                    </li>
+                    <input type="text"  class="form-control" name="goodsId" value="${goods.id}"/>
+                    <input type="text"  class="form-control" id="goods_name" name="goodsName" value="${goods.name}"/>
+                    <input type="image" class="col-xs-4 col-sm-3 col-md-2" src="/photo/view?filename=${goods.photo}" name="goodsPhoto" id="goodsPhoto" value="${goods.photo}"/>
                   </div>
                   <div class="input-group m-b-10">
                     <span class="input-group-addon">开始时间</span>
-                    <input type="datetime-local" class="form-control required" id="start_time" name="start_time" value=""/>`
+                    <input type="datetime-local" class="form-control required" id="start_time" name="startTime" value=""/>`
                   </div>
                   <div class="input-group m-b-10">
                     <span class="input-group-addon">结束时间</span>
-                    <input type="datetime-local" class="form-control" id="end_time" name="end_time" value="" />
+                    <input type="datetime-local" class="form-control" id="end_time" name="endTime" value="" />
                   </div>
                   <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary ajax-post" id="add-form-submit-btn">确 定</button>
+                    <button type="button" class="btn btn-primary ajax-post" id="add-form-submit-btn">确 定</button>
                     <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                   </div>
                 </form>
@@ -104,7 +100,6 @@
       });
     });
   });
-$("#goods").attr("disabled","disabled");
 </script>
 </body>
 </html>

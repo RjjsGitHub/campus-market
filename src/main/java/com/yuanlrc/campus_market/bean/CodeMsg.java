@@ -1,4 +1,7 @@
 package com.yuanlrc.campus_market.bean;
+
+import javafx.application.Preloader;
+
 /**
  * 错误码统一处理类，所有的错误码统一定义在这里
  * @author Administrator
@@ -104,6 +107,7 @@ public class CodeMsg {
 	public static CodeMsg ADMIN_GOODS_STATUS_ERROR = new CodeMsg(-9005, "物品状态错误！");
 	public static CodeMsg ADMIN_GOODS_EDIT_ERROR = new CodeMsg(-9006, "物品状态编辑失败，请联系管理员！");
 	public static CodeMsg ADMIN_GOODS_STATUS_UNABLE = new CodeMsg(-9007, "物品状态不可编辑（已出售的物品不可上架）！");
+	public static CodeMsg ADMIN_GOODS_STATUS_KILL = new CodeMsg(-9007, "物品状态不可编辑（物品秒杀中）！");
 	public static CodeMsg ADMIN_GOODS_DELETE_ERROR = new CodeMsg(-9008, "该物品存在评论信息或举报信息，不允许删除，请先删除评论信息或举报信息后再操作！");
 	
 	//后台学生管理
@@ -148,4 +152,11 @@ public class CodeMsg {
 	public static CodeMsg HOME_STUDENT_WISH_ADD_ERROR = new CodeMsg(-60000,"添加至愿望清单失败！");
 	public static CodeMsg HOME_STUDENT_WISH_DELETE_ERROR = new CodeMsg(-60001,"删除失败！");
 	public static CodeMsg HOME_STUDENT_WISH_EXIXT = new CodeMsg(-6002,"物品已存在");
+	//后台秒杀发布管理错误码
+	public static CodeMsg ADMIN_KILL_DELETE_ERROR = new CodeMsg(-70000,"删除失败！");
+	public static CodeMsg ADMIN_KILL_ADD_ERROR = new CodeMsg(-70001,"秒杀发布失败！");
+	public static CodeMsg ADMIN_KILL_ISSELL_ERROR = new CodeMsg(-70002,"物品已出售，或已被秒杀，无法发布！！");
+	//前台秒杀操作错误码
+	public static CodeMsg HOEM_KILL_FAIL = new CodeMsg(-8000,"商品已被秒杀，下次点快点！");
+	public static CodeMsg HOEM_KILL_SUCCESS = new CodeMsg(-8000,"已经是你的了，别点了！");
 }

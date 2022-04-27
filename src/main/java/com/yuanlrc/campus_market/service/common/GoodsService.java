@@ -34,13 +34,13 @@ public class GoodsService {
 	@Autowired
 	private GoodsDao goodsDao;
 
-	@Autowired
-	private StudentDao studentDao;
 
 	@Autowired
 	private KillProductServer killProductServer;
 
-
+	public Goods findByName(String name){
+		return goodsDao.findByName(name);
+	}
 
 	public Goods killProduct(Goods goods, Student student) {
 		 if (!goodsDao.existsById(goods.getId())){
@@ -50,9 +50,8 @@ public class GoodsService {
 
 		KillProduct killProduct = new KillProduct();
 		killProduct.setCreateTime(new Date());
-		killProduct.setStudent(student);
+		killProduct.setStudentName(student.getNickname());
 		killProduct.setGoodsName(goods.getName());
-		killProduct.setState(KillStates.SUCCESS.getCode());
 		killProductServer.save(killProduct);
 
 		return goods;

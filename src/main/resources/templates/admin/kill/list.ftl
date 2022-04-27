@@ -75,6 +75,7 @@ td{
                       <th>状态</th>
                       <th>开始时间</th>
                       <th>结束时间</th>
+                      <th>创建时间</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -94,7 +95,7 @@ td{
                         	</#if>
                         </td>
                         <td style="vertical-align:middle;">${kill_product.getGoodsName()}</td>
-                        <td style="vertical-align:middle;">${kill_product.student.getNickname()}</td>
+                        <td style="vertical-align:middle;">${kill_product.getStudentName()}</td>
                         <td style="vertical-align:middle;">-
                           ${kill_product.state}
 <#--                        	<#if kill_product.status == -1>-->
@@ -195,7 +196,7 @@ function deleteReq(id,url){
 		dataType:'json',
 		success:function(data){
 			if(data.code == 0){
-				showSuccessMsg('用户删除成功!',function(){
+				showSuccessMsg('删除成功!',function(){
 					$("input[type='checkbox']:checked").parents("tr").remove();
 				})
 			}else{

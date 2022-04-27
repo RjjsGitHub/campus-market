@@ -110,7 +110,7 @@
         if (!confirm('删除后不可恢复，确定要删除？')) {
             return;
         }
-        ajaxRequest('delete','post',{id:id},function(){
+        jaxRequest('delete','post',{id:id},function(){
             alert('删除成功');
             location.reload();
         });

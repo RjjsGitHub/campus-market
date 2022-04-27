@@ -22,7 +22,9 @@ public interface GoodsDao extends JpaRepository<Goods, Long>,JpaSpecificationExe
 	 */
 	@Query("select g from Goods g where id = :id")
 	Goods find(@Param("id")Long id);
-	
+
+	@Query(value="select * from ylrc_goods where name like %:name%",nativeQuery=true)
+	Goods findByName(@Param("name")String name);
 	/**
 	 * 根据学生查询
 	 * @param student

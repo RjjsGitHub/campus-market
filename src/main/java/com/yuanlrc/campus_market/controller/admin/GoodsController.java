@@ -93,6 +93,9 @@ public class GoodsController {
 		if(goods.getStatus() == Goods.GOODS_STATUS_SOLD){
 			return Result.error(CodeMsg.ADMIN_GOODS_STATUS_UNABLE);
 		}
+		if(goods.getStatus() == Goods.GOODS_STATUS_KILL){
+			return Result.error(CodeMsg.ADMIN_GOODS_STATUS_KILL);
+		}
 		goods.setStatus(status);
 		//进行更新数据库
 		if(goodsService.save(goods) ==null){
@@ -156,7 +159,9 @@ public class GoodsController {
 	 */
 	@RequestMapping(value="/add_kill",method= RequestMethod.GET)
 	public String add_kill(Model model,@RequestParam(name="id",required=true)Long id){
-		model.addAttribute("goods",goodsService.findById(id));
+		Goods goods = goodsService.findById(id);
+
+		model.addAttribute("goods",goods);
 		return "admin/goods/add_kill";
 	}
 
@@ -165,19 +170,30 @@ public class GoodsController {
 	 * @param
 	 * @return
 	 */
-	@PostMapping(value = "/add_kill")
+	@RequestMapping(value = "/add_kill" ,method = RequestMethod.POST)
 	@ResponseBody
-	public Result<Boolean> add_kill(KillProduct killProduct ) {
+	public Result<Boolean> add_kill(KillProduct killProduct) {
 		CodeMsg validate = ValidateEntityUtil.validate(killProduct);
 		if(validate.getCode() != CodeMsg.SUCCESS.getCode()){
 			return Result.error(validate);
 		}
-		killProduct.setGoodsName(killProduct.getGoodsName());
-		killProduct.setGoodsPhoto(killProduct.getGoodsPhoto());
+		Goods goods = goodsService.findById(killProduct.getGoodsId().getId());
+
+		//商品已出售或已被秒杀
+		if (goods.getStatus() == Goods.GOODS_STATUS_SOLD){
+			return Result.error(CodeMsg.ADMIN_KILL_ISSELL_ERROR);
+		}
+
+		killProduct.setGoodsName(goods.getName());
+		killProduct.setStudentName("暂无");
+		killProduct.setState(killProductServer.killState(killProduct.getStartTime(), killProduct.getEndTime()));
+		killProduct.setGoodsPhoto(goods.getPhoto());
 		killProduct.setStartTime(killProduct.getStartTime());
 		killProduct.setEndTime(killProduct.getEndTime());
+		goods.setStatus(Goods.GOODS_STATUS_KILL);
+
 		if(killProductServer.save(killProduct) == null){
-			return Result.error(CodeMsg.ADMIN_ROLE_ADD_ERROR);
+			return Result.error(CodeMsg.ADMIN_KILL_ADD_ERROR);
 		}
 		return Result.success(true);
 	}

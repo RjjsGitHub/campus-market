@@ -1,1 +1,1 @@
-`ylrc_goods`
+`ylrc_role_authorities``ylrc_menu``ylrc_menu`

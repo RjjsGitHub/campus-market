@@ -27,6 +27,7 @@ public class Goods extends BaseEntity implements Serializable {
 	public static final int GOODS_STATUS_UP = 1;//上架
 	public static final int GOODS_STATUS_DOWN = 2;//下架
 	public static final int GOODS_STATUS_SOLD = 3;//已售出
+	public static final int GOODS_STATUS_KILL = 4;//已加入秒杀
 	
 	public static final int GOODS_FLAG_ON = 1;//擦亮
 	public static final int GOODS_FLAG_OFF = 0;//不擦亮
